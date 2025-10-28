@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__SparkleInitializeSteam",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__SparkleInitializeSteam",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/Sparkle Store/(System).yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
