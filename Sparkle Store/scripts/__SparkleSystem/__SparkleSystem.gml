@@ -1,7 +1,5 @@
 // Feather disable all
 
-#macro __SPARKLE_SIMULTANEOUS  (SPARKLE_ALLOW_SIMULTANEOUS && (not SPARKLE_ON_CONSOLE))
-
 __SparkleSystem();
 
 function __SparkleSystem()
@@ -16,6 +14,9 @@ function __SparkleSystem()
     {
         __SparkleTrace("Welcome to Sparkle Store by Juju Adams!");
         
+        __lastQueuedTime = -infinity;
+        __gamepadIndex = -1;
+        
         __queuedArray      = [];
         __savePendingArray = [];
         __loadPendingArray = [];
@@ -23,29 +24,41 @@ function __SparkleSystem()
         __savePq = ds_priority_create();
         __loadPq = ds_priority_create();
         
-        if (SPARKLE_FORCE_DIRECTORY != undefined)
+        if (SPARKLE_FORCE_GROUP_NAME != undefined)
         {
-            __directory = SPARKLE_FORCE_DIRECTORY;
-            __SparkleTrace($"Initialized directory to \"{__directory}\" (forced)");
+            __groupName = string(SPARKLE_FORCE_GROUP_NAME);
+            __groupNameUnknown = false;
             
-            __unknownUser = false;
-        }
-        else if (SPARKLE_DEBUG_MODE && (SPARKLE_DEBUG_DIRECTORY != undefined))
-        {
-            __directory = SPARKLE_DEBUG_DIRECTORY;
-            __SparkleTrace($"Initialized directory to \"{__directory}\" (in debug mode)");
-            
-            __unknownUser = false;
+            __SparkleTrace($"Initialized group name to \"{__groupName}\" (forced)");
         }
         else
         {
-            __directory = SPARKLE_UNKNOWN_DIRECTORY;
-            __SparkleTrace($"Initialized directory to \"{__directory}\"");
+            __groupName = string(SPARKLE_ON_CONSOLE? SPARKLE_CONSOLE_GROUP_NAME : SPARKLE_UNKNOWN_GROUP_NAME);
+            __groupNameUnknown = true;
             
-            __unknownUser = true;
+            __SparkleTrace($"Initialized group name to \"{__groupName}\"");
         }
         
         __SparkleInitializeSteam();
+        
+        if (SPARKLE_ON_DESKTOP && __usingSteamworks)
+        {
+            try
+            {
+                __groupName = string(steam_get_user_steam_id());
+                __groupNameUnknown = false;
+            }
+            catch(_error)
+            {
+                show_debug_message(_error);
+                __SparkleError("Failed to obtain Steam user ID");
+            }
+        }
+        
+        if (__groupNameUnknown)
+        {
+            __SparkleTrace($"Warning! Group name not known");
+        }
         
         time_source_start(time_source_create(time_source_global, 1, time_source_units_frames, function()
         {

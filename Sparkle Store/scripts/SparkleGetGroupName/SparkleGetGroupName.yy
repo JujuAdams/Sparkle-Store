@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"__SparkleClass",
+  "%Name":"SparkleGetGroupName",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"__SparkleClass",
+  "name":"SparkleGetGroupName",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Sparkle Store/(System).yy",
+    "name":"Getters",
+    "path":"folders/Sparkle Store/Getters.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

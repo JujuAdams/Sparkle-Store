@@ -1,11 +1,22 @@
 // Feather disable all
 
-/// @param callback
+/// Starts an asynchronous load operation for JSON (i.e. a struct/array assembly). Please see
+/// `SparkleLoad()` for more information.
+/// 
 /// @param filename
-/// @param [highPriority=false]
-/// @param [ignoreDelay=false]
+/// @param callback
+/// @param [priority=normal]
 
-function SparkleLoadJSON(_callback, _filename, _highPriority = false, _ignoreDelay = false)
+function SparkleLoadJSON(_filename, _callback, _priority = SPARKLE_PRIORITY_NORMAL)
 {
-    //TODO
+    var _newCallback = method({
+        __callback: _callback,
+    },
+    function(_string)
+    {
+        var _json = json_parse(_string);
+        __callback(_json);
+    });
+    
+    return SparkleLoadString(_newCallback, _filename, _priority);
 }

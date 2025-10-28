@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"SparkleGetUnknownUser",
+  "%Name":"SparkleSetGroupName",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"SparkleGetUnknownUser",
+  "name":"SparkleSetGroupName",
   "parent":{
     "name":"Getters",
     "path":"folders/Sparkle Store/Getters.yy",

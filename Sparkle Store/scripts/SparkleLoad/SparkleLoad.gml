@@ -1,12 +1,30 @@
 // Feather disable all
 
-/// @param callback
+/// Starts an asynchronous load operation for a buffer (or part of a buffer).
+/// 
 /// @param filename
-/// @param [buffer]
-/// @param [highPriority=false]
-/// @param [ignoreDelay=false]
+/// @param callback
+/// @param [priority=normal]
 
-function SparkleLoad(_callback, _filename, _buffer = undefined, _highPriority = false, _ignoreDelay = false)
+function SparkleLoad(_filename, _callback, _priority = SPARKLE_PRIORITY_NORMAL)
 {
-    //TODO
+    static _system = __SparkleSystem();
+    static _queuedArray = _system.__queuedArray;
+    
+    var _struct = new __SparkleClassLoad(_system.__groupName, _filename, _callback, _system.__gamepadIndex);
+    
+    if (_priority == SPARKLE_PRIORITY_HIGH)
+    {
+        array_insert(_queuedArray, _struct, 0);
+    }
+    else if (_priority == SPARKLE_PRIORITY_IMMEDIATE)
+    {
+        _struct.__Execute();
+    }
+    else
+    {
+        array_push(_queuedArray, _struct);
+    }
+    
+    return _struct;
 }

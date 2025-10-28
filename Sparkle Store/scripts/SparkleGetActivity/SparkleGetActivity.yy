@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"SparkleSetDirectory",
+  "%Name":"SparkleGetActivity",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"SparkleSetDirectory",
+  "name":"SparkleGetActivity",
   "parent":{
     "name":"Getters",
     "path":"folders/Sparkle Store/Getters.yy",

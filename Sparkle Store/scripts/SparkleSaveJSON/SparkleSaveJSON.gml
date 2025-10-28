@@ -1,13 +1,15 @@
 // Feather disable all
 
-/// @param callback
+/// Starts an asynchronous save operation for JSON (i.e. a struct/array assembly). Please see
+/// `SparkleSave()` for more information.
+/// 
 /// @param filename
 /// @param json
+/// @param callback
 /// @param [pretty=false]
-/// @param [highPriority=false]
-/// @param [ignoreDelay=false]
+/// @param [priority=normal]
 
-function SparkleSaveJSON(_callback, _filename, _json, _pretty = false, _highPriority = false, _ignoreDelay = false)
+function SparkleSaveJSON(_filename, _json, _callback, _pretty = false, _priority = SPARKLE_PRIORITY_NORMAL)
 {
-    //TODO
+    return SparkleSaveString(_filename, json_stringify(_json, _pretty), _callback, _priority);
 }

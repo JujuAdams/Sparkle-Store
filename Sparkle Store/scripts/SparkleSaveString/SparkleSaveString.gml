@@ -1,12 +1,17 @@
 // Feather disable all
 
-/// @param callback
+/// Starts an asynchronous save operation for a string. Please see `SparkleSave()` for more
+/// information.
+/// 
 /// @param filename
 /// @param string
-/// @param [highPriority=false]
-/// @param [ignoreDelay=false]
+/// @param callback
+/// @param [priority=normal]
 
-function SparkleSaveString(_callback, _filename, _string, _highPriority = false, _ignoreDelay = false)
+function SparkleSaveString(_filename, _string, _callback, _priority = SPARKLE_PRIORITY_NORMAL)
 {
-    //TODO
+    var _buffer = buffer_create(string_byte_length(_string), buffer_fixed, 1);
+    buffer_write(_buffer, buffer_text, _string);
+    
+    return SparkleSave(_filename, _buffer, _callback, undefined, undefined, _priority);
 }

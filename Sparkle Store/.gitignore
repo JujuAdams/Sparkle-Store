@@ -1,3 +1,9 @@
+build
+extensions/Steamworks
+options/extensions/Steamworks.json
+
+# GameMaker things
+
 # Windows
  
 # Windows thumbnail cache files

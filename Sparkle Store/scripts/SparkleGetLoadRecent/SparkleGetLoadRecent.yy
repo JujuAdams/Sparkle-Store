@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"SparkleGetDirectory",
+  "%Name":"SparkleGetLoadRecent",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"SparkleGetDirectory",
+  "name":"SparkleGetLoadRecent",
   "parent":{
     "name":"Getters",
     "path":"folders/Sparkle Store/Getters.yy",

@@ -1,0 +1,116 @@
+// Feather disable all
+
+/// @param groupName
+/// @param filename
+/// @param buffer
+/// @param offset
+/// @param size
+/// @param callback
+/// @param gamepadIndex
+
+function __SparkleClassSave(_groupName, _filename, _buffer, _offset, _size, _callback, _gamepadIndex) constructor
+{
+    static _system = __SparkleSystem();
+    static _queuedArray      = _system.__queuedArray;
+    static _savePendingArray = _system.__savePendingArray;
+    static _savePq           = _system.__savePq;
+    
+    if (SPARKLE_VERBOSE)
+    {
+        __SparkleTrace($"Created SAVE operation {string(ptr(self))}: group name = \"{_groupName}\", filename = \"{_filename}\", buffer = {_buffer}, offset = {_offset}, size = {_size}, callback = {_callback}");
+    }
+    
+    __groupName    = _groupName;
+    __filename     = _filename;
+    __buffer       = _buffer;
+    __offset       = _offset;
+    __size         = _size;
+    __callback     = _callback;
+    __gamepadIndex = _gamepadIndex;
+    
+    __executed    = false;
+    __executeTime = infinity;
+    __asyncID     = undefined;
+    __status      = SPARKLE_STATUS_QUEUED;
+    
+    static GetOperation = function()
+    {
+        return SPARKLE_OP_SAVE;
+    }
+    
+    static Cancel = function()
+    {
+        __Complete(SPARKLE_STATUS_CANCELLED);
+    }
+    
+    static __Execute = function()
+    {
+        if (__executed)
+        {
+            return;
+        }
+        
+        if (SPARKLE_VERBOSE)
+        {
+            __SparkleTrace($"Executing SAVE operation {string(ptr(self))}");
+        }
+        
+        __executed = true;
+        __executeTime = current_time;
+        
+        buffer_async_group_begin(__groupName);
+    	buffer_async_group_option("showdialog", 0);
+        
+        if (SPARKLE_ON_PS4)
+        {
+        	buffer_async_group_option("savepadindex", __gamepadIndex);
+        	buffer_async_group_option("slottitle",    SPARKLE_CONSOLE_SLOT_TITLE);
+        	buffer_async_group_option("subtitle",     SPARKLE_CONSOLE_SUBTITLE);
+        }
+        
+        buffer_save_async(__buffer, __filename, __offset, __size);
+        
+    	__asyncID = buffer_async_group_end();
+        
+        var _index = array_get_index(_queuedArray, self);
+        if (_index >= 0) array_delete(_queuedArray, _index, 1);
+        
+        array_push(_savePendingArray, self);
+        ds_priority_add(_savePq, self, current_time);
+        
+        __status = SPARKLE_STATUS_PENDING;
+    }
+    
+    static __Complete = function(_status)
+    {
+        if (SPARKLE_VERBOSE)
+        {
+            __SparkleTrace($"Completing SAVE operation {string(ptr(self))}: status = {_status}");
+        }
+        
+        if (SPARKLE_ON_SWITCH)
+        {
+            switch_save_data_commit();
+        }
+        
+        __status = _status;
+        __asyncID = undefined;
+        
+        var _index = array_get_index(_queuedArray, self);
+        if (_index >= 0) array_delete(_queuedArray, _index, 1);
+        
+        var _index = array_get_index(_savePendingArray, self);
+        if (_index >= 0) array_delete(_savePendingArray, _index, 1);
+        
+        if (is_callable(__callback))
+        {
+            __callback(_status);
+        }
+        
+        if (__buffer != undefined)
+        {
+            buffer_delete(__buffer);
+            __buffer = undefined;
+        }
+    }
+}
