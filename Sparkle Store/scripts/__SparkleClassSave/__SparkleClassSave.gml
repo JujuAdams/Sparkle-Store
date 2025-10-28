@@ -1,6 +1,5 @@
 // Feather disable all
 
-/// @param groupName
 /// @param filename
 /// @param buffer
 /// @param offset
@@ -8,25 +7,28 @@
 /// @param callback
 /// @param gamepadIndex
 
-function __SparkleClassSave(_groupName, _filename, _buffer, _offset, _size, _callback, _gamepadIndex) constructor
+function __SparkleClassSave( _filename, _buffer, _offset, _size, _callback) constructor
 {
     static _system = __SparkleSystem();
     static _queuedArray      = _system.__queuedArray;
     static _savePendingArray = _system.__savePendingArray;
     static _savePq           = _system.__savePq;
     
+    __filename = _filename;
+    __buffer   = _buffer;
+    __offset   = _offset;
+    __size     = _size;
+    __callback = _callback;
+    
+    __groupName    = _system.__groupName;
+    __gamepadIndex = _system.__gamepadIndex;
+    __slotTitle    = _system.__slotTitle;
+    __slotSubtitle = _system.__slotSubtitle;
+    
     if (SPARKLE_VERBOSE)
     {
-        __SparkleTrace($"Created SAVE operation {string(ptr(self))}: group name = \"{_groupName}\", filename = \"{_filename}\", buffer = {_buffer}, offset = {_offset}, size = {_size}, callback = {_callback}");
+        __SparkleTrace($"Created SAVE operation {string(ptr(self))}: group name = \"{__groupName}\", slot title = \"{__slotTitle}\", filename = \"{_filename}\", buffer = {_buffer}, offset = {_offset}, size = {_size}, callback = {_callback}");
     }
-    
-    __groupName    = _groupName;
-    __filename     = _filename;
-    __buffer       = _buffer;
-    __offset       = _offset;
-    __size         = _size;
-    __callback     = _callback;
-    __gamepadIndex = _gamepadIndex;
     
     __executed    = false;
     __executeTime = infinity;
@@ -64,8 +66,8 @@ function __SparkleClassSave(_groupName, _filename, _buffer, _offset, _size, _cal
         if (SPARKLE_ON_PS4)
         {
         	buffer_async_group_option("savepadindex", __gamepadIndex);
-        	buffer_async_group_option("slottitle",    SPARKLE_CONSOLE_SLOT_TITLE);
-        	buffer_async_group_option("subtitle",     SPARKLE_CONSOLE_SUBTITLE);
+        	buffer_async_group_option("slottitle",    __slotTitle);
+        	buffer_async_group_option("subtitle",     __slotSubtitle);
         }
         
         buffer_save_async(__buffer, __filename, __offset, __size);

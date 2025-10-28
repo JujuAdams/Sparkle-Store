@@ -23,8 +23,8 @@
 // batches of infrequent save/load operations.
 #macro SPARKLE_NO_RATE_LIMIT_COUNT  5
 
-// Properties for console-specific save operations. You especially should adjust the slot title
-// and subtitle to suit your game. Please note that the slot title should not contain spaces.
+// Default values for console-specific operations. You can change these values at runtime using the
+// relevant Sparkle Store functions. Please note that the slot title should not contain spaces.
 #macro SPARKLE_CONSOLE_SLOT_TITLE  "Game"
 #macro SPARKLE_CONSOLE_SUBTITLE    "Game savedata"
 #macro SPARKLE_CONSOLE_GROUP_NAME  "savedata"

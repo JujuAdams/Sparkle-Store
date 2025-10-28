@@ -1,26 +1,27 @@
 // Feather disable all
 
-/// @param groupName
 /// @param filename
 /// @param callback
-/// @param gamepadIndex
 
-function __SparkleClassLoad(_groupName, _filename, _callback, _gamepadIndex) constructor
+function __SparkleClassLoad(_filename, _callback) constructor
 {
     static _system = __SparkleSystem();
     static _queuedArray      = _system.__queuedArray;
     static _loadPendingArray = _system.__loadPendingArray;
     static _loadPq           = _system.__loadPq;
     
+    __filename = _filename;
+    __callback = _callback;
+    
+    __groupName    = _system.__groupName;
+    __gamepadIndex = _system.__gamepadIndex;
+    __slotTitle    = _system.__slotTitle;
+    __slotSubtitle = _system.__slotSubtitle;
+    
     if (SPARKLE_VERBOSE)
     {
-        __SparkleTrace($"Created LOAD operation {string(ptr(self))}: group name = \"{_groupName}\", filename = \"{_filename}\", callback = {_callback}");
+        __SparkleTrace($"Created LOAD operation {string(ptr(self))}: group name = \"{__groupName}\", slot title = \"{__slotTitle}\", filename = \"{_filename}\", callback = {_callback}");
     }
-    
-    __groupName    = _groupName;
-    __filename     = _filename;
-    __callback     = _callback;
-    __gamepadIndex = _gamepadIndex;
     
     __buffer      = undefined;
     __executed    = false;
@@ -61,8 +62,8 @@ function __SparkleClassLoad(_groupName, _filename, _callback, _gamepadIndex) con
         if (SPARKLE_ON_PS4)
         {
         	buffer_async_group_option("savepadindex", __gamepadIndex);
-        	buffer_async_group_option("slottitle",    SPARKLE_CONSOLE_SLOT_TITLE);
-        	buffer_async_group_option("subtitle",     SPARKLE_CONSOLE_SUBTITLE);
+        	buffer_async_group_option("slottitle",    __slotTitle);
+        	buffer_async_group_option("subtitle",     __slotSubtitle);
         }
         
         buffer_load_async(__buffer, __filename, 0, -1);

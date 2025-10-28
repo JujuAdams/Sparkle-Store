@@ -15,7 +15,10 @@ function __SparkleSystem()
         __SparkleTrace("Welcome to Sparkle Store by Juju Adams!");
         
         __lastQueuedTime = -infinity;
+        
         __gamepadIndex = -1;
+        __slotTitle    = SPARKLE_CONSOLE_SLOT_TITLE;
+        __slotSubtitle = SPARKLE_CONSOLE_SUBTITLE;
         
         __queuedArray      = [];
         __savePendingArray = [];

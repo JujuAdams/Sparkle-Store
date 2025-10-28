@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"SparkleGetGroupName",
+  "%Name":"SparkleSetConsoleSlotSubtitle",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"SparkleGetGroupName",
+  "name":"SparkleSetConsoleSlotSubtitle",
   "parent":{
     "name":"Options",
     "path":"folders/Sparkle Store/Options.yy",

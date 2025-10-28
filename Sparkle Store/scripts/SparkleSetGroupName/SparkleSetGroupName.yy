@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"SparkleSetGroupName",
   "parent":{
-    "name":"Getters",
-    "path":"folders/Sparkle Store/Getters.yy",
+    "name":"Options",
+    "path":"folders/Sparkle Store/Options.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

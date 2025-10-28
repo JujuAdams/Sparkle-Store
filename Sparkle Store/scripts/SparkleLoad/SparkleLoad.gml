@@ -11,7 +11,7 @@ function SparkleLoad(_filename, _callback, _priority = SPARKLE_PRIORITY_NORMAL)
     static _system = __SparkleSystem();
     static _queuedArray = _system.__queuedArray;
     
-    var _struct = new __SparkleClassLoad(_system.__groupName, _filename, _callback, _system.__gamepadIndex);
+    var _struct = new __SparkleClassLoad(_filename, _callback);
     
     if (_priority == SPARKLE_PRIORITY_HIGH)
     {

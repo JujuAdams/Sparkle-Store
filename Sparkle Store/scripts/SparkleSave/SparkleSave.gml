@@ -16,7 +16,7 @@ function SparkleSave(_filename, _buffer, _callback, _offset = 0, _size = infinit
     
     _size = clamp(_size, 0, buffer_get_size(_buffer) - _offset);
     
-    var _struct = new __SparkleClassSave(_system.__groupName, _filename, _buffer, _offset, _size, _callback, _system.__gamepadIndex);
+    var _struct = new __SparkleClassSave(_filename, _buffer, _offset, _size, _callback);
     
     if (_priority == SPARKLE_PRIORITY_HIGH)
     {
