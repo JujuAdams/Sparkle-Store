@@ -1,6 +1,7 @@
 // Feather disable all
 
-/// Sets the current slot title for future save/load operations.
+/// Sets the current slot title for future save/load operations. This value will not impact any
+/// operations that have already been started.
 /// 
 /// @param slotTitle
 

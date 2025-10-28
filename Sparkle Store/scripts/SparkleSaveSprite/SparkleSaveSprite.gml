@@ -1,7 +1,18 @@
 // Feather disable all
 
-/// Starts an asynchronous save operation for one image of a sprite. Please see `SparkleSave()` for
-/// more information.
+/// Starts an asynchronous save operation for one image of a sprite. This function is a wrapper
+/// around `SparkleSave()`. Please see documentation for that function for more information.
+/// 
+/// N.B. This function saves using a custom format and is not a PNG file. You can load a sprite
+///      saved by this function with either `SparkleLoadSurface()` or `...LoadSprite()`.
+/// 
+/// The callback for this function will be executed with two parameters:
+/// 
+/// argument0: The "status" of the save operation. This is one of the `SPARKLE_STATUS_*`
+///            constants. Please see the `__SparkleConstants` script for more information.
+/// 
+/// argument1: This parameter is always `undefined`. Normally, this is the buffer used to save
+///            the file but Sparkle Store handles this for you.
 /// 
 /// @param callback
 /// @param filename

@@ -1,5 +1,43 @@
 // Feather disable all
 
+///////
+// Status
+///////
+
+// The operation was cancelled.
+#macro SPARKLE_STATUS_CANCELLED  -2
+
+// The operation was reported to have failed by GameMaker.
+#macro SPARKLE_STATUS_FAILED  -1
+
+// THe operation has been queued and has not yet started.
+#macro SPARKLE_STATUS_QUEUED  0
+
+// The operation has started and we are waiting for it to complete.
+#macro SPARKLE_STATUS_PENDING  0.1
+
+// The operation completed successfully.
+#macro SPARKLE_STATUS_SUCCESS  1
+
+///////
+// Priority
+///////
+
+// The operation will be added to the back of the queue and will be executed when prior operations
+// have finished.
+#macro SPARKLE_PRIORITY_NORMAL  0
+
+// The operation will be added to the front of the queue and will be executed at the nearest
+// opportunity ahead of enqueued operations.
+#macro SPARKLE_PRIORITY_HIGH  1
+
+// The operation will be executed immediately, ignoring any save/load rate limits.
+#macro SPARKLE_PRIORITY_IMMEDIATE  2
+
+///////
+// Other
+///////
+
 #macro SPARKLE_RUNNING_FROM_IDE  (GM_build_type == "run")
 
 #macro SPARKLE_ON_WINDOWS  (os_type == os_windows)
@@ -13,15 +51,5 @@
 #macro SPARKLE_ON_MOBILE   ((os_type == os_ios) || (os_type == os_android))
 #macro SPARKLE_ON_DESKTOP  (SPARKLE_ON_WINDOWS || SPARKLE_ON_MAC || SPARKLE_ON_LINUX)
 
-#macro SPARKLE_STATUS_CANCELLED  -2
-#macro SPARKLE_STATUS_FAILED     -1
-#macro SPARKLE_STATUS_QUEUED      0
-#macro SPARKLE_STATUS_PENDING     0.1
-#macro SPARKLE_STATUS_SUCCESS     1
-
 #macro SPARKLE_OP_SAVE  0
 #macro SPARKLE_OP_LOAD  1
-
-#macro SPARKLE_PRIORITY_NORMAL     0
-#macro SPARKLE_PRIORITY_HIGH       1
-#macro SPARKLE_PRIORITY_IMMEDIATE  2

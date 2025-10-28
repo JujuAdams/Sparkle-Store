@@ -25,6 +25,7 @@ function __SparkleClassLoad(_filename, _callback) constructor
     
     __buffer       = undefined;
     __executed     = false;
+    __completed    = false;
     __activityTime = infinity;
     __asyncID      = undefined;
     __status       = SPARKLE_STATUS_QUEUED;
@@ -39,12 +40,14 @@ function __SparkleClassLoad(_filename, _callback) constructor
         __Complete(SPARKLE_STATUS_CANCELLED);
     }
     
+    static GetStatus = function()
+    {
+        return __status;
+    }
+    
     static __Execute = function()
     {
-        if (__executed)
-        {
-            return;
-        }
+        if (__executed) return;
         
         if (SPARKLE_VERBOSE)
         {
@@ -81,6 +84,11 @@ function __SparkleClassLoad(_filename, _callback) constructor
     
     static __Complete = function(_status)
     {
+        if (__completed) return;
+        
+        __completed = true;
+        __activityTime = current_time;
+        
         if (SPARKLE_VERBOSE)
         {
             __SparkleTrace($"Completing LOAD operation {string(ptr(self))}: status = {_status}");
@@ -88,7 +96,6 @@ function __SparkleClassLoad(_filename, _callback) constructor
         
         __status = _status;
         __asyncID = undefined;
-        __activityTime = current_time;
         
         var _index = array_get_index(_queuedArray, self);
         if (_index >= 0) array_delete(_queuedArray, _index, 1);

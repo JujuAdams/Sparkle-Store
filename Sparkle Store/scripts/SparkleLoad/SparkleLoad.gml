@@ -1,6 +1,35 @@
 // Feather disable all
 
-/// Starts an asynchronous load operation for a buffer (or part of a buffer).
+/// Starts an asynchronous load operation for a buffer (or part of a buffer). If the load operation
+/// is successful, the contents of the file will be placed into a buffer that Sparkle Store creates
+/// for you. This buffer is then returned via the callback (see below). You can also specify a
+/// priority using one of the `SPARKLE_PRIORITY_*` constants. Please see `__SparkleConstants` for
+/// more information.
+/// 
+/// The callback for this function will be executed with two parameters:
+/// 
+/// argument0: The "status" of the load operation. This is one of the `SPARKLE_STATUS_*`
+///            constants. Please see the `__SparkleConstants` script for more information.
+/// 
+/// argument1: A buffer that, hopefully, contains data loaded from the file. The buffer can be
+///            empty but the status can be `true` in some edge cases on console. Be sure to check
+///            if it has content before using it. However, a buffer is always returned and you are
+///            responsible for destroying this buffer if when you don't need it.
+/// 
+/// This function returns a struct that contains private information that Sparkle Store needs to
+/// track file saving. The struct has no public variables. However, it has the following public
+/// methods:
+/// 
+/// `.GetOperation()`
+///     Returns `SPARKLE_OP_LOAD`.
+/// 
+/// `.Cancel()`
+///     Cancels the operation immediately. This will execute the callback with the
+///     `SPARKLE_STATUS_CANCELLED` status.
+/// 
+/// `.GetStatus()`
+///     Returns the status of the operation. This will be one of the `SPARKLE_STATUS_*` constants.
+///     Please see `__SparkleConstants` for more information.
 /// 
 /// @param filename
 /// @param callback

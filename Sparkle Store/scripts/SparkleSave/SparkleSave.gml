@@ -1,6 +1,33 @@
 // Feather disable all
 
-/// Starts an asynchronous save operation for a buffer (or part of a buffer).
+/// Starts an asynchronous save operation for a buffer (or part of a buffer). You may optionally
+/// specify an offset and size for the data you want to save. If not defined, the entire buffer
+/// will be saved. You can also specify a priority using one of the `SPARKLE_PRIORITY_*` constants.
+/// Please see `__SparkleConstants` for more information.
+/// 
+/// The callback for this function will be executed with two parameters:
+/// 
+/// argument0: The "status" of the save operation. This is one of the `SPARKLE_STATUS_*`
+///            constants. Please see the `__SparkleConstants` script for more information.
+/// 
+/// argument1: The buffer used to save the file. You must destroy this buffer with `buffer_delete()`
+///            if you have no other use for it otherwise you will have a memory leak.
+/// 
+/// This function returns a struct that contains private information that Sparkle Store needs to
+/// track file saving. The struct has no public variables. However, it has the following public
+/// methods:
+/// 
+/// `.GetOperation()`
+///     Returns `SPARKLE_OP_SAVE`.
+/// 
+/// `.Cancel()`
+///     Cancels the operation immediately. This will execute the callback with the
+///     `SPARKLE_STATUS_CANCELLED` status. If the operation is cancelled afer the OS has started
+///     saving data then a file may still be saved to disk.
+/// 
+/// `.GetStatus()`
+///     Returns the status of the operation. This will be one of the `SPARKLE_STATUS_*` constants.
+///     Please see `__SparkleConstants` for more information.
 /// 
 /// @param filename
 /// @param buffer
@@ -9,7 +36,7 @@
 /// @param [size]
 /// @param [priority=normal]
 
-function SparkleSave(_filename, _buffer, _callback, _offset = 0, _size = infinity, _priority = false)
+function SparkleSave(_filename, _buffer, _callback, _offset = 0, _size = infinity, _priority = SPARKLE_PRIORITY_NORMAL)
 {
     static _system = __SparkleSystem();
     static _queuedArray = _system.__queuedArray;

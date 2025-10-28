@@ -1,7 +1,18 @@
 // Feather disable all
 
-/// Starts an asynchronous save operation for a surface. Please see `SparkleSave()` for more
-/// information.
+/// Starts an asynchronous save operation for a surface. This function is a wrapper around
+/// `SparkleSave()`. Please see documentation for that function for more information.
+/// 
+/// N.B. This function saves using a custom format and is not a PNG file. You can load a surface
+///      saved by this function with either `SparkleLoadSurface()` or `...LoadSprite()`.
+/// 
+/// The callback for this function will be executed with two parameters:
+/// 
+/// argument0: The "status" of the save operation. This is one of the `SPARKLE_STATUS_*`
+///            constants. Please see the `__SparkleConstants` script for more information.
+/// 
+/// argument1: This parameter is always `undefined`. Normally, this is the buffer used to save
+///            the file but Sparkle Store handles this for you.
 /// 
 /// @param filename
 /// @param surface
@@ -17,6 +28,19 @@ function SparkleSaveSurface(_filename, _surface, _callback, _priority = SPARKLE_
     
     var _compressedBuffer = buffer_compress(_buffer, 0, buffer_get_size(_buffer));
     buffer_delete(_buffer);
+    
+    var _callback = method({
+        __callback: _callback,
+    },
+    function(_status, _buffer)
+    {
+        buffer_delete(_buffer);
+        
+        if (is_callable(__callback))
+        {
+            __callback(_status, undefined);
+        }
+    });
     
     return SparkleSave(_filename, _compressedBuffer, _callback, undefined, undefined, _priority);
 }

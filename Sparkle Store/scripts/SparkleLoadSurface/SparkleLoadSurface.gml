@@ -1,7 +1,18 @@
 // Feather disable all
 
-/// Starts an asynchronous load operation for surface. Please see `SparkleLoad()` for more
-/// information.
+/// Starts an asynchronous load operation for surface. This function is a wrapper around
+/// `SparkleLoad()`. Please see documentation for that function for more information.
+/// 
+/// N.B. This function expects the file to be saved by `SparkleSaveSurface()` or
+///      `SparkleSaveSprite()` and cannot read  PNG, JPEG, GIF files etc.
+/// 
+/// The callback for this function will be executed with two parameters:
+/// 
+/// argument0: The "status" of the load operation. This is one of the `SPARKLE_STATUS_*`
+///            constants. Please see the `__SparkleConstants` script for more information.
+/// 
+/// argument1: The surface (struct/array assembly) that was found in the file. If there was a
+///            problem or the file was empty then this parameter will be set to `-1`.
 /// 
 /// @param filename
 /// @param callback
@@ -12,16 +23,28 @@ function SparkleLoadSurface(_filename, _callback, _priority = SPARKLE_PRIORITY_N
     var _newCallback = method({
         __callback: _callback,
     },
-    function(_buffer)
+    function(_status, _buffer)
     {
-        buffer_seek(_buffer, buffer_seek_start, 0);
-        var _width  = buffer_read(_buffer, buffer_u64);
-        var _height = buffer_read(_buffer, buffer_u64);
+        if (_status)
+        {
+            buffer_seek(_buffer, buffer_seek_start, 0);
+            var _width  = buffer_read(_buffer, buffer_u64);
+            var _height = buffer_read(_buffer, buffer_u64);
+            
+            var _surface = surface_create(_width, _height);
+            buffer_set_surface(_buffer, _surface, 0);
+        }
+        else
+        {
+            var _surface = -1;
+        }
         
-        var _surface = surface_create(_width, _height);
-        buffer_set_surface(_buffer, _surface, 0);
+        buffer_delete(_buffer);
         
-        __callback(_surface);
+        if (is_callable(__callback))
+        {
+            __callback(_surface);
+        }
     });
     
     return SparkleLoad(_newCallback, _filename, _priority);

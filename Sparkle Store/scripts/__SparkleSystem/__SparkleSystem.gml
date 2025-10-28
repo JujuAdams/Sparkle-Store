@@ -26,10 +26,10 @@ function __SparkleSystem()
         __saveActivityArray = [];
         __loadActivityArray = [];
         
-        if (SPARKLE_FORCE_GROUP_NAME != undefined)
+        if (SPARKLE_IDE_GROUP_NAME != undefined)
         {
-            __groupName = string(SPARKLE_FORCE_GROUP_NAME);
-            __SparkleTrace($"Initialized group name to \"{__groupName}\" (forced)");
+            __groupName = string(SPARKLE_IDE_GROUP_NAME);
+            __SparkleTrace($"Initialized group name to \"{__groupName}\" (forced from IDE)");
         }
         else
         {

@@ -31,6 +31,7 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
     }
     
     __executed     = false;
+    __completed    = false;
     __activityTime = infinity;
     __asyncID      = undefined;
     __status       = SPARKLE_STATUS_QUEUED;
@@ -45,20 +46,22 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
         __Complete(SPARKLE_STATUS_CANCELLED);
     }
     
+    static GetStatus = function()
+    {
+        return __status;
+    }
+    
     static __Execute = function()
     {
-        if (__executed)
-        {
-            return;
-        }
+        if (__executed) return;
+        
+        __executed = true;
+        __activityTime = current_time;
         
         if (SPARKLE_VERBOSE)
         {
             __SparkleTrace($"Executing SAVE operation {string(ptr(self))}");
         }
-        
-        __executed = true;
-        __activityTime = current_time;
         
         buffer_async_group_begin(__groupName);
     	buffer_async_group_option("showdialog", 0);
@@ -85,19 +88,23 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
     
     static __Complete = function(_status)
     {
+        if (__completed) return;
+        
+        __completed = true;
+        __activityTime = current_time;
+        
         if (SPARKLE_VERBOSE)
         {
             __SparkleTrace($"Completing SAVE operation {string(ptr(self))}: status = {_status}");
         }
         
-        if (SPARKLE_ON_SWITCH)
+        if (SPARKLE_ON_SWITCH && (_status == SPARKLE_STATUS_SUCCESS))
         {
             switch_save_data_commit();
         }
         
         __status = _status;
         __asyncID = undefined;
-        __activityTime = current_time;
         
         var _index = array_get_index(_queuedArray, self);
         if (_index >= 0) array_delete(_queuedArray, _index, 1);
@@ -107,13 +114,7 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
         
         if (is_callable(__callback))
         {
-            __callback(_status);
-        }
-        
-        if (__buffer != undefined)
-        {
-            buffer_delete(__buffer);
-            __buffer = undefined;
+            __callback(_status, __buffer);
         }
     }
 }

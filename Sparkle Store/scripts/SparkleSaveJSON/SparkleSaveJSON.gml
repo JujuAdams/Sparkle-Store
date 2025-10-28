@@ -1,7 +1,16 @@
 // Feather disable all
 
-/// Starts an asynchronous save operation for JSON (i.e. a struct/array assembly). Please see
-/// `SparkleSave()` for more information.
+/// Starts an asynchronous save operation for JSON (i.e. a struct/array assembly). This function
+/// is a wrapper around `SparkleSave()`. Please see documentation for that function for more
+/// information.
+/// 
+/// The callback for this function will be executed with two parameters:
+/// 
+/// argument0: The "status" of the save operation. This is one of the `SPARKLE_STATUS_*`
+///            constants. Please see the `__SparkleConstants` script for more information.
+/// 
+/// argument1: This parameter is always `undefined`. Normally, this is the buffer used to save
+///            the file but Sparkle Store handles this for you.
 /// 
 /// @param filename
 /// @param json
