@@ -1,12 +1,12 @@
 // Feather disable all
 
-// Group name to set when the library boots up. This can be overriden later by calling
+// Group name to initialize to when the library boots up. This can be overriden later by calling
 // `SparkleSetGroupName()`. The group name determines the save directory that a file gets placed
 // into on most (but not all!) platforms. Please refer to savefile documentation for consoles for
 // further information.
 #macro SPARKLE_DEFAULT_GROUP_NAME  "savedata"
 
-// Group name to use when running from the IDE. Setting this macro to anything other than
+// Group name to initialize to when running from the IDE. Setting this macro to anything other than
 // `undefined` wil cause Sparkle Store to initialize the group name to the macro value, overriding
 // `SPARKLE_DEFAULT_GROUP_NAME` above. This is helpful when testing.
 #macro SPARKLE_IDE_GROUP_NAME  undefined

@@ -24,7 +24,7 @@ function __SparkleClassLoad(_filename, _callback) constructor
     }
     
     __buffer       = undefined;
-    __executed     = false;
+    __dispatched   = false;
     __completed    = false;
     __activityTime = infinity;
     __asyncID      = undefined;
@@ -45,16 +45,16 @@ function __SparkleClassLoad(_filename, _callback) constructor
         return __status;
     }
     
-    static __Execute = function()
+    static __Dispatch = function()
     {
-        if (__executed) return;
+        if (__dispatched) return;
         
         if (SPARKLE_VERBOSE)
         {
-            __SparkleTrace($"Executing LOAD operation {string(ptr(self))}");
+            __SparkleTrace($"Dispatching LOAD operation {string(ptr(self))}");
         }
         
-        __executed = true;
+        __dispatched = true;
         __activityTime = current_time;
         
         __buffer = buffer_create(1, buffer_grow, 1);

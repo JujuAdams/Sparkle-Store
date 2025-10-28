@@ -23,15 +23,15 @@
 // Priority
 ///////
 
-// The operation will be added to the back of the queue and will be executed when prior operations
-// have finished.
+// The operation will be added to the back of the queue and will be dispatched when prior
+// operations have completed.
 #macro SPARKLE_PRIORITY_NORMAL  0
 
-// The operation will be added to the front of the queue and will be executed at the nearest
+// The operation will be added to the front of the queue and will be dispatched at the nearest
 // opportunity ahead of enqueued operations.
 #macro SPARKLE_PRIORITY_HIGH  1
 
-// The operation will be executed immediately, ignoring any save/load rate limits.
+// The operation will be dispatched immediately, ignoring any save/load rate limits.
 #macro SPARKLE_PRIORITY_IMMEDIATE  2
 
 ///////

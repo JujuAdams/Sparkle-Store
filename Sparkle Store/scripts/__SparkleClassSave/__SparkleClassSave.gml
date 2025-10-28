@@ -30,7 +30,7 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
         __SparkleTrace($"Created SAVE operation {string(ptr(self))}: group name = \"{__groupName}\", slot title = \"{__slotTitle}\", filename = \"{_filename}\", buffer = {_buffer}, offset = {_offset}, size = {_size}, callback = {_callback}");
     }
     
-    __executed     = false;
+    __dispatched   = false;
     __completed    = false;
     __activityTime = infinity;
     __asyncID      = undefined;
@@ -51,16 +51,16 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
         return __status;
     }
     
-    static __Execute = function()
+    static __Dispatch = function()
     {
-        if (__executed) return;
+        if (__dispatched) return;
         
-        __executed = true;
+        __dispatched = true;
         __activityTime = current_time;
         
         if (SPARKLE_VERBOSE)
         {
-            __SparkleTrace($"Executing SAVE operation {string(ptr(self))}");
+            __SparkleTrace($"Dispatching SAVE operation {string(ptr(self))}");
         }
         
         buffer_async_group_begin(__groupName);

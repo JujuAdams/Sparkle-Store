@@ -6,7 +6,7 @@
 /// priority using one of the `SPARKLE_PRIORITY_*` constants. Please see `__SparkleConstants` for
 /// more information.
 /// 
-/// The callback for this function will be executed with two parameters:
+/// The callback for this function will be dispatched with two parameters:
 /// 
 /// argument0: The "status" of the load operation. This is one of the `SPARKLE_STATUS_*`
 ///            constants. Please see the `__SparkleConstants` script for more information.
@@ -48,7 +48,7 @@ function SparkleLoad(_filename, _callback, _priority = SPARKLE_PRIORITY_NORMAL)
     }
     else if (_priority == SPARKLE_PRIORITY_IMMEDIATE)
     {
-        _struct.__Execute();
+        _struct.__Dispatch();
     }
     else
     {
