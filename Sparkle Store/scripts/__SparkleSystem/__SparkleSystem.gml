@@ -16,9 +16,10 @@ function __SparkleSystem()
         
         __lastActivityTime = -infinity;
         
-        __gamepadIndex = -1;
-        __slotTitle    = SPARKLE_CONSOLE_SLOT_TITLE;
-        __slotSubtitle = SPARKLE_CONSOLE_SUBTITLE;
+        __slotTitle      = SPARKLE_CONSOLE_SLOT_TITLE;
+        __slotSubtitle   = SPARKLE_CONSOLE_SUBTITLE;
+        __psGamepadIndex = -1;
+        __xboxUserID     = pointer_null;
         
         __queuedArray       = [];
         __savePendingArray  = [];

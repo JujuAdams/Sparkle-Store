@@ -13,10 +13,11 @@ function __SparkleClassLoad(_filename, _callback) constructor
     __filename = _filename;
     __callback = _callback;
     
-    __groupName    = _system.__groupName;
-    __gamepadIndex = _system.__gamepadIndex;
-    __slotTitle    = _system.__slotTitle;
-    __slotSubtitle = _system.__slotSubtitle;
+    __groupName      = _system.__groupName;
+    __psGamepadIndex = _system.__psGamepadIndex;
+    __slotTitle      = _system.__slotTitle;
+    __slotSubtitle   = _system.__slotSubtitle;
+    __xboxUserID     = _system.__xboxUserID;
     
     if (SPARKLE_VERBOSE)
     {
@@ -59,14 +60,18 @@ function __SparkleClassLoad(_filename, _callback) constructor
         
         __buffer = buffer_create(1, buffer_grow, 1);
         
-        buffer_async_group_begin(__groupName);
-    	buffer_async_group_option("showdialog", 0);
-        
-        if (SPARKLE_ON_PS4)
+        if (SPARKLE_ON_XBOX)
         {
-        	buffer_async_group_option("savepadindex", __gamepadIndex);
+            xboxone_set_savedata_user(__xboxUserID);
+        }
+        
+        buffer_async_group_begin(__groupName);
+    	buffer_async_group_option("showdialog", true);
+        
+        if (SPARKLE_ON_PS_ANY)
+        {
+        	buffer_async_group_option("savepadindex", __psGamepadIndex);
         	buffer_async_group_option("slottitle",    __slotTitle);
-        	buffer_async_group_option("subtitle",     __slotSubtitle);
         }
         
         buffer_load_async(__buffer, __filename, 0, -1);

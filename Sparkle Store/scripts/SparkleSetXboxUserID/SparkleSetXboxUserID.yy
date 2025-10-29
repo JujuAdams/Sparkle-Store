@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"SparkleGetConsoleGamepadIndex",
+  "%Name":"SparkleSetXboxUserID",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"SparkleGetConsoleGamepadIndex",
+  "name":"SparkleSetXboxUserID",
   "parent":{
     "name":"Options",
     "path":"folders/Sparkle Store/Options.yy",

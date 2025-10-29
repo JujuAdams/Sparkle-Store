@@ -2,10 +2,18 @@
 
 with(__SparkleSystem())
 {
-    var _id     = async_load[? "id"    ];
-    var _error  = async_load[? "error" ];
-    var _status = async_load[? "status"];
+    var _id        = async_load[? "id"    ];
+    var _error     = async_load[? "error" ];
+    var _rawStatus = async_load[? "status"];
     
+    if (SPARKLE_ON_SWITCH || SPARKLE_ON_PS_ANY || SPARKLE_ON_XBOX)
+    {
+        var _status = (_rawStatus >= 0);
+    }
+    else
+    {
+        var _status = (_rawStatus > 0);
+    }
     
     var _i = 0;
     repeat(array_length(__savePendingArray))

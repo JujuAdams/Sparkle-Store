@@ -29,7 +29,7 @@ function SparkleSaveSurface(_filename, _surface, _callback, _priority = SPARKLE_
     var _compressedBuffer = buffer_compress(_buffer, 0, buffer_get_size(_buffer));
     buffer_delete(_buffer);
     
-    var _callback = method({
+    var _newCallback = method({
         __callback: _callback,
     },
     function(_status, _buffer)
@@ -42,5 +42,5 @@ function SparkleSaveSurface(_filename, _surface, _callback, _priority = SPARKLE_
         }
     });
     
-    return SparkleSave(_filename, _compressedBuffer, _callback, undefined, undefined, _priority);
+    return SparkleSave(_filename, _compressedBuffer, _newCallback, undefined, undefined, _priority);
 }

@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns the currently set group name.
+/// Returns the currently set group name for save/load operations.
 
 function SparkleGetGroupName()
 {

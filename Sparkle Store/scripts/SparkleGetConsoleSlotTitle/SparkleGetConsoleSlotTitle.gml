@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns the current slot title.
+/// Returns the current slot title for save/load operations.
 
 function SparkleGetConsoleSlotTitle()
 {

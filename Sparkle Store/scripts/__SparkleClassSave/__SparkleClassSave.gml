@@ -20,10 +20,11 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
     __size     = _size;
     __callback = _callback;
     
-    __groupName    = _system.__groupName;
-    __gamepadIndex = _system.__gamepadIndex;
-    __slotTitle    = _system.__slotTitle;
-    __slotSubtitle = _system.__slotSubtitle;
+    __groupName      = _system.__groupName;
+    __psGamepadIndex = _system.__psGamepadIndex;
+    __slotTitle      = _system.__slotTitle;
+    __slotSubtitle   = _system.__slotSubtitle;
+    __xboxUserID     = _system.__xboxUserID;
     
     if (SPARKLE_VERBOSE)
     {
@@ -63,14 +64,25 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
             __SparkleTrace($"Dispatching SAVE operation {string(ptr(self))}");
         }
         
-        buffer_async_group_begin(__groupName);
-    	buffer_async_group_option("showdialog", 0);
-        
-        if (SPARKLE_ON_PS4)
+        if (SPARKLE_ON_XBOX)
         {
-        	buffer_async_group_option("savepadindex", __gamepadIndex);
+            xboxone_set_savedata_user(__xboxUserID);
+        }
+        
+        buffer_async_group_begin(__groupName);
+    	buffer_async_group_option("showdialog", true);
+        
+        if (SPARKLE_ON_PS_ANY)
+        {
+        	buffer_async_group_option("savepadindex", __psGamepadIndex);
         	buffer_async_group_option("slottitle",    __slotTitle);
         	buffer_async_group_option("subtitle",     __slotSubtitle);
+        }
+        
+        if (SPARKLE_ON_PS5)
+        {
+            //Always save backups
+            buffer_async_group_option("ps_create_backup", true);
         }
         
         buffer_save_async(__buffer, __filename, __offset, __size);
