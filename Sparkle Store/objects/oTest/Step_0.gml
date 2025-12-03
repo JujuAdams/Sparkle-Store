@@ -1,63 +1,55 @@
 // Feather disable all
 
-if (keyboard_check_pressed(ord("1")))
+if (loadedGraphicAlpha > 0)
 {
-    SparkleSaveString("test.txt", "Test String", function(_status)
+    loadedGraphicAlpha = max(loadedGraphicAlpha - 0.01, 0);
+    if (loadedGraphicAlpha <= 0)
     {
-        show_debug_message($"Returned status {_status}");
-    });
-}
-
-if (keyboard_check_pressed(ord("2")))
-{
-    repeat(5)
-    {
-        SparkleSaveString("test.txt", "Test String", function(_status)
+        if (loadedSurface != undefined)
         {
-            show_debug_message($"Returned status {_status}");
-        });
+            surface_free(loadedSurface);
+            loadedSurface = undefined;
+        }
     }
 }
 
-if (keyboard_check_pressed(ord("3")))
+var _i = 0;
+repeat(gamepad_get_device_count())
 {
-    repeat(10)
+    if (gamepad_button_check_pressed(_i, gp_start))
     {
-        SparkleSaveString("test.txt", "Test String", function(_status)
-        {
-            show_debug_message($"Returned status {_status}");
-        });
+        gamepadFocus = _i;
+        SparkleSetPSGamepadIndex(_i);
     }
-}
-
-if (keyboard_check_pressed(ord("4")))
-{
-    watchStart = current_time;
     
-    repeat(40)
-    {
-        SparkleSaveString("test.txt", "Test String", function(_status)
-        {
-            show_debug_message($"Returned status {_status}");
-        });
-    }
+    ++_i;
 }
 
-if (keyboard_check_pressed(ord("5")))
+if (keyboard_check(vk_anykey))
 {
-    watchStart = current_time;
-    
-    repeat(40)
-    {
-        SparkleSaveString("test.txt", "Test String", function(_status)
-        {
-            show_debug_message($"Returned status {_status}");
-        });
-    }
+    gamepadFocus = -1;
+    SparkleSetPSGamepadIndex(-1);
+}
+
+var _optionCount = array_length(optionArray);
+
+if (keyboard_check_pressed(vk_up) || gamepad_button_check_pressed(gamepadFocus, gp_padu))
+{
+    optionIndex = (optionIndex - 1 + _optionCount) mod _optionCount;
+}
+
+if (keyboard_check_pressed(vk_down) || gamepad_button_check_pressed(gamepadFocus, gp_padd))
+{
+    optionIndex = (optionIndex + 1) mod _optionCount;
+}
+
+if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space) || gamepad_button_check_pressed(gamepadFocus, gp_face1))
+{
+    optionArray[optionIndex].func();
 }
 
 if ((watchStart != undefined) && (not SparkleGetActivity(0)))
 {
-    show_message(current_time - watchStart);
+    show_debug_message($"Operation lasted {current_time - watchStart}ms");
     watchStart = undefined;
 }
