@@ -23,29 +23,39 @@ function SparkleLoadSurface(_filename, _callback, _priority = SPARKLE_PRIORITY_N
     var _newCallback = method({
         __callback: _callback,
     },
-    function(_status, _buffer)
+    function(_status, _compressedBuffer)
     {
         if (_status)
         {
-            buffer_seek(_buffer, buffer_seek_start, 0);
-            var _width  = buffer_read(_buffer, buffer_u64);
-            var _height = buffer_read(_buffer, buffer_u64);
+            var _buffer = buffer_decompress(_compressedBuffer);
+            buffer_delete(_compressedBuffer);
             
-            var _surface = surface_create(_width, _height);
-            buffer_set_surface(_buffer, _surface, 0);
+            if (_buffer >= 0)
+            {
+                buffer_seek(_buffer, buffer_seek_start, 0);
+                var _width  = buffer_read(_buffer, buffer_u64);
+                var _height = buffer_read(_buffer, buffer_u64);
+                
+                var _surface = surface_create(_width, _height);
+                buffer_set_surface(_buffer, _surface, buffer_tell(_buffer));
+                
+                buffer_delete(_buffer);
+            }
+            else
+            {
+                __SparkleTrace("Warning! Failed to decompress image buffer");
+                var _surface = -1;
+            }
         }
         else
         {
             var _surface = -1;
         }
-        
-        buffer_delete(_buffer);
-        
         if (is_callable(__callback))
         {
             __callback(_surface);
         }
     });
     
-    return SparkleLoad(_newCallback, _filename, _priority);
+    return SparkleLoad(_filename, _newCallback, _priority);
 }

@@ -45,5 +45,5 @@ function SparkleLoadSprite(_filename, _callback, _priority = SPARKLE_PRIORITY_NO
         }
     });
     
-    return SparkleLoad(_newCallback, _filename, _priority);
+    return SparkleLoad(_filename, _newCallback, _priority);
 }

@@ -36,5 +36,5 @@ function SparkleLoadString(_filename, _callback, _priority = SPARKLE_PRIORITY_NO
         __callback(_status, _string);
     });
     
-    return SparkleLoad(_newCallback, _filename, _priority);
+    return SparkleLoad(_filename, _newCallback, _priority);
 }

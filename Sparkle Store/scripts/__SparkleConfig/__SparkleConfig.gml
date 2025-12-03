@@ -18,7 +18,7 @@
 
 // Whether to log Sparkle Store operations. This is helpful when debugging your game but ordinarily
 // can be left turned off.
-#macro SPARKLE_VERBOSE  false
+#macro SPARKLE_VERBOSE  true
 
 // Maximum number of save/load operations that can be completed in a minute. These numbers are
 // used to calculate the delays between operations. Default values for Nintendo Switch are
