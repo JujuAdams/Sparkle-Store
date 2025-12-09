@@ -48,6 +48,11 @@ if (keyboard_check_pressed(vk_enter) || keyboard_check_pressed(vk_space) || game
     optionArray[optionIndex].func();
 }
 
+if (keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(gamepadFocus, gp_face4))
+{
+    SparkleCancelAll();
+}
+
 if ((watchStart != undefined) && (not SparkleGetActivity(0)))
 {
     show_debug_message($"Operation lasted {current_time - watchStart}ms");

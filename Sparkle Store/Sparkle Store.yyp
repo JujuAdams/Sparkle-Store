@@ -37,6 +37,7 @@
     {"id":{"name":"__SparkleInitializeSteam","path":"scripts/__SparkleInitializeSteam/__SparkleInitializeSteam.yy",},},
     {"id":{"name":"__SparkleSystem","path":"scripts/__SparkleSystem/__SparkleSystem.yy",},},
     {"id":{"name":"__SparkleTrace","path":"scripts/__SparkleTrace/__SparkleTrace.yy",},},
+    {"id":{"name":"SparkleCancelAll","path":"scripts/SparkleCancelAll/SparkleCancelAll.yy",},},
     {"id":{"name":"SparkleGetActivity","path":"scripts/SparkleGetActivity/SparkleGetActivity.yy",},},
     {"id":{"name":"SparkleGetConsoleSlotSubtitle","path":"scripts/SparkleGetConsoleSlotSubtitle/SparkleGetConsoleSlotSubtitle.yy",},},
     {"id":{"name":"SparkleGetConsoleSlotTitle","path":"scripts/SparkleGetConsoleSlotTitle/SparkleGetConsoleSlotTitle.yy",},},
