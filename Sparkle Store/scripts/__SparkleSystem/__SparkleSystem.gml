@@ -17,6 +17,7 @@ function __SparkleSystem()
         __SparkleTrace("Welcome to Sparkle Store by Juju Adams!");
         
         __lastActivityTime = -infinity;
+        __anyRequestMade = false;
         
         __slotTitle      = SPARKLE_CONSOLE_SLOT_TITLE;
         __slotSubtitle   = SPARKLE_CONSOLE_SUBTITLE;

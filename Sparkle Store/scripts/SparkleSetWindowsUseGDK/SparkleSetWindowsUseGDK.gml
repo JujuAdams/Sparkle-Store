@@ -1,17 +1,29 @@
 // Feather disable all
 
-/// @param state
+/// Sets up GDK functions for use with saving and loading. This function should only be called once
+/// and must be called before saving/loading any data (otherwise the library will use the wrong
+/// internal functions).
+/// 
+/// N.B. You will still need to call `gdk_init()`, `gdk_update()` etc. in your own code.
 
-function SparkleSetWindowsUseGDK(_state)
+function SparkleSetWindowsUseGDK()
 {
     static _system = __SparkleSystem();
     
     if (os_type == os_windows)
     {
-        _system.__windowsUseGDK = _state;
+        if (not _system.__windowsUseGDK)
+        {
+            if (SPARKLE_RUNNING_FROM_IDE && _system.__anyRequestMade)
+            {
+                __SparkleError("Must call `SparkleSetWindowsUseGDK()` before calling save/load functions");
+            }
+            
+            _system.__windowsUseGDK = true;
+        }
     }
-    else if (_state)
+    else
     {
-        __SparkleTrace("Warning! Cannot use GDK on non-Windows platforms");
+        __SparkleTrace("Warning! Can only use GDK on Windows");
     }
 }

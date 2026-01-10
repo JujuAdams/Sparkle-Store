@@ -1,7 +1,10 @@
 // Feather disable all
 
+/// Returns whether the library is using GDK on Windows. This function will always return `false`
+/// when not on Windows.
+
 function SparkleGetWindowsUseGDK()
 {
     static _system = __SparkleSystem();
-    return _system.__windowsUseGDK;
+    return SPARKLE_ON_WINDOWS? _system.__windowsUseGDK : false;
 }
