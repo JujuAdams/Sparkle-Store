@@ -8,5 +8,5 @@
 function SparkleSetPSGamepadIndex(_gamepadIndex)
 {
     static _system = __SparkleSystem();
-    _system.__psGamepadIndex = string(_gamepadIndex);
+    _system.__psGamepadIndex = _gamepadIndex;
 }

@@ -42,6 +42,16 @@ function SparkleLoad(_filename, _callback, _priority = SPARKLE_PRIORITY_NORMAL)
     
     _system.__anyRequestMade = true;
     
+    if ((SPARKLE_ON_XBOX || SparkleGetWindowsUseGDK()) && ((__xboxUser == 0) || (__xboxUser == pointer_null)))
+    {
+        __SparkleError($"Xbox user is invalid {__xboxUser}");
+    }
+    
+    if (SPARKLE_ON_PS_ANY && (__psGamepadIndex < 0))
+    {
+        __SparkleError($"Gamepad index is invalid {__psGamepadIndex}");
+    }
+    
     var _struct = new __SparkleClassLoad(_filename, _callback);
     
     if (_priority == SPARKLE_PRIORITY_HIGH)

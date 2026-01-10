@@ -12,7 +12,8 @@
 #macro SPARKLE_IDE_GROUP_NAME  undefined
 
 // Default values for console-specific operations. You can change these values at runtime using the
-// relevant Sparkle Store functions. Please note that the slot title should not contain spaces.
+// relevant Sparkle Store functions. Please note that the slot title should not contain spaces for
+// compatibility cross-platform.
 #macro SPARKLE_CONSOLE_SLOT_TITLE  "GameWithName"
 #macro SPARKLE_CONSOLE_SUBTITLE    "Game savedata"
 
@@ -26,10 +27,10 @@
 #macro SPARKLE_MAX_SAVE_FREQUENCY  (SPARKLE_ON_SWITCH? 25 : infinity)
 #macro SPARKLE_MAX_LOAD_FREQUENCY  (SPARKLE_ON_SWITCH? 25 : infinity)
 
-// Maximum number of operations allowed at the same time. This logic does not differentiate between
-// saves and loads. A value of `1` is the safest as it ensures that prior operations complete fully
-// before starting another.
+// Maximum number of operations (saves and loads combined) allowed at the same time. A value of `1`
+// is the safest as it ensures that prior operations complete fully before starting another.
 // 
-// N.B. This macro is internally forced to `1` on consoles.
+// N.B. This macro is internally forced to `1` on consoles to work around limitations with
+//      GameMaker's native file operations.
 // 
 #macro SPARKLE_MAX_SIMULTANEOUS_OPERATIONS  1

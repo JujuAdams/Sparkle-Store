@@ -106,11 +106,6 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
                 
                 if (SPARKLE_ON_PS_ANY)
                 {
-                    if (__psGamepadIndex < 0)
-                    {
-                        __SparkleError("Gamepad index is unset");
-                    }
-                    
                     buffer_async_group_option("showdialog",   __psShowDialog);
                     buffer_async_group_option("savepadindex", __psGamepadIndex);
                     buffer_async_group_option("slottitle",    __slotTitle);
