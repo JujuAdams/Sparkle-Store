@@ -9,6 +9,5 @@
 function SparkleSetXboxUser(_xboxUser)
 {
     static _system = __SparkleSystem();
-    
     _system.__xboxUser = _xboxUser;
 }

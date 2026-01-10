@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"SparkleGetXboxUser",
   "parent":{
-    "name":"Options",
-    "path":"folders/Sparkle Store/Options.yy",
+    "name":"Xbox",
+    "path":"folders/Sparkle Store/Options/Xbox.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

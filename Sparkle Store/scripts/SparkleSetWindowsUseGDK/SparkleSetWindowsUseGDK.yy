@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"SparkleSetXboxUser",
+  "%Name":"SparkleSetWindowsUseGDK",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"SparkleSetXboxUser",
+  "name":"SparkleSetWindowsUseGDK",
   "parent":{
     "name":"Xbox",
     "path":"folders/Sparkle Store/Options/Xbox.yy",

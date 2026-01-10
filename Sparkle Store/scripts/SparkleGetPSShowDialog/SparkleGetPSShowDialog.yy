@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"SparkleGetPSShowDialog",
   "parent":{
-    "name":"Options",
-    "path":"folders/Sparkle Store/Options.yy",
+    "name":"PlayStation",
+    "path":"folders/Sparkle Store/Options/PlayStation.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

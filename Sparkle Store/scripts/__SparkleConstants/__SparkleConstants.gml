@@ -46,7 +46,6 @@
 #macro SPARKLE_ON_SWITCH    (os_type == os_switch)
 #macro SPARKLE_ON_PS4       (os_type == os_ps4)
 #macro SPARKLE_ON_PS5       (os_type == os_ps5)
-#macro SPARKLE_ON_XBOX_ONE  (os_type == os_xboxone)
 #macro SPARKLE_ON_XBOX      ((os_type == os_xboxone) || (os_type == os_xboxseriesxs))
 #macro SPARKLE_ON_ANDROID   (os_type == os_android)
 #macro SPARKLE_ON_IOS       (os_type == os_ios)

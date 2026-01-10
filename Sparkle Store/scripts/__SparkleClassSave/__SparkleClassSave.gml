@@ -65,35 +65,44 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
             __SparkleTrace($"Dispatching SAVE operation {string(ptr(self))}");
         }
         
-        if (SPARKLE_ON_XBOX_ONE)
+        if (SPARKLE_ON_XBOX || (SPARKLE_ON_WINDOWS && _system.__windowsUseGDK))
         {
             xboxone_set_savedata_user(__xboxUser);
         }
         
-        buffer_async_group_begin(__groupName);
-        
-        if (SPARKLE_ON_PS_ANY)
+        if (SPARKLE_ON_WINDOWS && _system.__windowsUseGDK)
         {
-            if (__psGamepadIndex < 0)
+            gdk_save_group_begin($"root/{__slotTitle}"); //Recommended by YYG for cross-platform save support
+            gdk_save_buffer(__buffer, __filename, __offset, __size);
+            __asyncID = gdk_save_group_end();
+        }
+        else
+        {
+            buffer_async_group_begin(__groupName);
+            
+            if (SPARKLE_ON_PS_ANY)
             {
-                __SparkleError("Gamepad index is unset");
+                if (__psGamepadIndex < 0)
+                {
+                    __SparkleError("Gamepad index is unset");
+                }
+            
+                buffer_async_group_option("showdialog",   __psShowDialog);
+                buffer_async_group_option("savepadindex", __psGamepadIndex);
+                buffer_async_group_option("slottitle",    __slotTitle);
+                buffer_async_group_option("subtitle",     __slotSubtitle);
             }
             
-            buffer_async_group_option("showdialog",   __psShowDialog);
-            buffer_async_group_option("savepadindex", __psGamepadIndex);
-            buffer_async_group_option("slottitle",    __slotTitle);
-            buffer_async_group_option("subtitle",     __slotSubtitle);
+            if (SPARKLE_ON_PS5)
+            {
+                //Always save backups
+                buffer_async_group_option("ps_create_backup", true);
+            }
+            
+            buffer_save_async(__buffer, __filename, __offset, __size);
+            
+            __asyncID = buffer_async_group_end();
         }
-        
-        if (SPARKLE_ON_PS5)
-        {
-            //Always save backups
-            buffer_async_group_option("ps_create_backup", true);
-        }
-        
-        buffer_save_async(__buffer, __filename, __offset, __size);
-        
-        __asyncID = buffer_async_group_end();
         
         var _index = array_get_index(_queuedArray, self);
         if (_index >= 0) array_delete(_queuedArray, _index, 1);
