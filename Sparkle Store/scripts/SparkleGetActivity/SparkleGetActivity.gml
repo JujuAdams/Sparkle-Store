@@ -1,7 +1,7 @@
 // Feather disable all
 
 /// Returns whether there was save/load activity recently within the given timespan. This is
-/// useful for setting up save/load indicators in your game's UI.
+/// useful for setting up a save/load indicator in your game's UI.
 /// 
 /// @param [milliseconds=1000]
 

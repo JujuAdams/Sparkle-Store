@@ -76,12 +76,12 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
             {
                 var _tempBuffer = buffer_create(__size, buffer_fixed, 1);
                 buffer_copy(__buffer, __offset, __size, _tempBuffer, 0);
-                steam_file_write_buffer($"{__slotTitle}/{__slotTitle}");
+                steam_file_write_buffer($"{__groupName}/{__filename}");
                 buffer_delete(_tempBuffer);
             }
             else
             {
-                steam_file_write_buffer($"{__slotTitle}/{__slotTitle}");
+                steam_file_write_buffer($"{__groupName}/{__filename}");
             }
             
             __Complete(SPARKLE_STATUS_SUCCESS);
@@ -91,7 +91,7 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
             if (SparkleGetWindowsUseGDK())
             {
                 xboxone_set_savedata_user(__xboxUser);
-                gdk_save_group_begin($"root/{__slotTitle}"); //Recommended by YYG for cross-platform save support
+                gdk_save_group_begin($"root/{__groupName}"); //Recommended by YYG for cross-platform save support
                 gdk_save_buffer(__buffer, __filename, __offset, __size);
                 __asyncID = gdk_save_group_end();
             }

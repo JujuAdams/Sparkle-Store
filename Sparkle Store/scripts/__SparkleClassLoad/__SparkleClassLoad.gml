@@ -66,9 +66,9 @@ function __SparkleClassLoad(_filename, _callback) constructor
         
         if (SparkleGetSteamCloud())
         {
-            if (steam_file_exists($"{__slotTitle}/{__slotTitle}"))
+            if (steam_file_exists($"{__groupName}/{__filename}"))
             {
-                __buffer = steam_file_read_buffer($"{__slotTitle}/{__slotTitle}");
+                __buffer = steam_file_read_buffer($"{__groupName}/{__filename}");
                 if (__buffer < 0) __buffer = undefined;
             }
             
@@ -81,7 +81,7 @@ function __SparkleClassLoad(_filename, _callback) constructor
             if (SparkleGetWindowsUseGDK())
             {
                 xboxone_set_savedata_user(__xboxUser);
-                __asyncID = gdk_load_buffer(__buffer, $"root/{__slotTitle}/{__filename}", 0, -1); //Recommended by YYG for cross-platform save support
+                __asyncID = gdk_load_buffer(__buffer, $"root/{__groupName}/{__filename}", 0, -1); //Recommended by YYG for cross-platform save support
             }
             else
             {
