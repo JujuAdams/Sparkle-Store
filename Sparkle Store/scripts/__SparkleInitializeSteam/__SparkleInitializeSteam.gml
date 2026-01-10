@@ -4,9 +4,9 @@ function __SparkleInitializeSteam()
 {
     with(__SparkleSystem())
     {
-        __usingSteam      = false;
-        __usingSteamworks = false;
-        __cloudEnabled    = false;
+        __usingSteam        = false;
+        __usingSteamworks   = false;
+        __steamCloudEnabled = false;
         
         var _steamEnviron = environment_get_variable("SteamEnv");
         if ((_steamEnviron != "") && (_steamEnviron == "1"))
@@ -23,6 +23,7 @@ function __SparkleInitializeSteam()
         catch(_error)
         {
             __SparkleTrace("Steamworks extension unavailable");
+            return;
         }
         
         if (__usingSteamworks)
@@ -34,7 +35,7 @@ function __SparkleInitializeSteam()
                 if (steam_is_cloud_enabled_for_account())
                 {
                     __SparkleTrace("Steam Cloud enabled for account, using cloud saves");
-                    __cloudEnabled = true;
+                    __steamCloudEnabled = true;
                 }
                 else
                 {

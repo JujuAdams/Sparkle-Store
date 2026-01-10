@@ -59,45 +59,59 @@ function __SparkleClassLoad(_filename, _callback) constructor
         __dispatched = true;
         __activityTime = current_time;
         
-        __buffer = buffer_create(1, buffer_grow, 1);
-        
-        if (SPARKLE_ON_XBOX || (SPARKLE_ON_WINDOWS && _system.__windowsUseGDK))
-        {
-            xboxone_set_savedata_user(__xboxUser);
-        }
-        
-        if (SPARKLE_ON_WINDOWS && _system.__windowsUseGDK)
-        {
-            __asyncID = gdk_load_buffer(__buffer, $"root/{__slotTitle}/{__filename}", 0, -1); //Recommended by YYG for cross-platform save support
-        }
-        else
-        {
-            buffer_async_group_begin(__groupName);
-            
-            if (SPARKLE_ON_PS_ANY)
-            {
-                if (__psGamepadIndex < 0)
-                {
-                    __SparkleError("Gamepad index is unset");
-                }
-                
-                buffer_async_group_option("showdialog",   __psShowDialog);
-                buffer_async_group_option("savepadindex", __psGamepadIndex);
-                buffer_async_group_option("slottitle",    __slotTitle);
-            }
-            
-            buffer_load_async(__buffer, __filename, 0, -1);
-            
-            __asyncID = buffer_async_group_end();
-        }
-        
         var _index = array_get_index(_queuedArray, self);
         if (_index >= 0) array_delete(_queuedArray, _index, 1);
         
-        array_push(_loadPendingArray, self);
         array_push(_loadActivityArray, self);
         
-        __status = SPARKLE_STATUS_PENDING;
+        if (SparkleGetSteamCloud())
+        {
+            if (steam_file_exists($"{__slotTitle}/{__slotTitle}"))
+            {
+                __buffer = steam_file_read_buffer($"{__slotTitle}/{__slotTitle}");
+                if (__buffer < 0) __buffer = undefined;
+            }
+            
+            __Complete((__buffer == undefined)? SPARKLE_STATUS_FAILED : SPARKLE_STATUS_SUCCESS);
+        }
+        else
+        {
+            __buffer = buffer_create(1, buffer_grow, 1);
+            
+            if (SparkleGetWindowsUseGDK())
+            {
+                xboxone_set_savedata_user(__xboxUser);
+                __asyncID = gdk_load_buffer(__buffer, $"root/{__slotTitle}/{__filename}", 0, -1); //Recommended by YYG for cross-platform save support
+            }
+            else
+            {
+                if (SPARKLE_ON_XBOX)
+                {
+                    xboxone_set_savedata_user(__xboxUser);
+                }
+                
+                buffer_async_group_begin(__groupName);
+                
+                if (SPARKLE_ON_PS_ANY)
+                {
+                    if (__psGamepadIndex < 0)
+                    {
+                        __SparkleError("Gamepad index is unset");
+                    }
+                    
+                    buffer_async_group_option("showdialog",   __psShowDialog);
+                    buffer_async_group_option("savepadindex", __psGamepadIndex);
+                    buffer_async_group_option("slottitle",    __slotTitle);
+                }
+                
+                buffer_load_async(__buffer, __filename, 0, -1);
+                
+                __asyncID = buffer_async_group_end();
+            }
+            
+            __status = SPARKLE_STATUS_PENDING;
+            array_push(_loadPendingArray, self);
+        }
     }
     
     static __Complete = function(_status)
