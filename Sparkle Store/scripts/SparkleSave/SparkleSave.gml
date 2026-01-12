@@ -43,9 +43,9 @@ function SparkleSave(_filename, _buffer, _callback, _offset = 0, _size = infinit
     
     _system.__anyRequestMade = true;
     
-    if ((SPARKLE_ON_XBOX || SparkleGetWindowsUseGDK()) && (__xboxUser == 0))
+    if ((SPARKLE_ON_XBOX || SparkleGetWindowsUseGDK()) && (_system.__xboxUser == 0))
     {
-        __SparkleError($"Xbox user is invalid {__xboxUser}");
+        __SparkleError($"Xbox user is invalid {_system.__xboxUser}");
     }
     
     if (SPARKLE_ON_PS_ANY && (__psGamepadIndex < 0))

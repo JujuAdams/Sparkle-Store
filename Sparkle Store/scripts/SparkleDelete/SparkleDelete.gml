@@ -36,9 +36,9 @@ function SparkleDelete(_filename, _callback, _priority = SPARKLE_PRIORITY_NORMAL
     
     _system.__anyRequestMade = true;
     
-    if ((SPARKLE_ON_XBOX || SparkleGetWindowsUseGDK()) && (__xboxUser == 0))
+    if ((SPARKLE_ON_XBOX || SparkleGetWindowsUseGDK()) && (_system.__xboxUser == 0))
     {
-        __SparkleError($"Xbox user is invalid {__xboxUser}");
+        __SparkleError($"Xbox user is invalid {_system.__xboxUser}");
     }
     
     if (SPARKLE_ON_PS_ANY && (__psGamepadIndex < 0))
