@@ -4,21 +4,13 @@ function __SparkleInitializeSteam()
 {
     with(__SparkleSystem())
     {
-        __usingSteam        = false;
         __usingSteamworks   = false;
         __steamCloudEnabled = false;
-        
-        var _steamEnviron = environment_get_variable("SteamEnv");
-        if ((_steamEnviron != "") && (_steamEnviron == "1"))
-        {
-            __usingSteam = true;
-        }
         
         try
         {
             //Using Steamworks extension
-            __usingSteamworks = steam_input_init(true);
-            __onSteamDeck     = steam_utils_is_steam_running_on_steam_deck();
+            __usingSteamworks = steam_is_user_logged_on();
         }
         catch(_error)
         {
