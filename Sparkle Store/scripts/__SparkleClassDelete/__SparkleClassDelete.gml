@@ -72,7 +72,7 @@ function __SparkleClassDelete(_filename, _callback) constructor
         {
             if (SparkleGetWindowsUseGDK())
             {
-                xboxone_set_savedata_user(__xboxUser);
+                xboxone_set_savedata_user(_system.__xboxUser);
                 var _buffer = __SparkleEmptyBuffer();
                 
                 gdk_save_group_begin($"root/{__groupName}"); //Recommended by YYG for cross-platform save support
@@ -93,7 +93,7 @@ function __SparkleClassDelete(_filename, _callback) constructor
             {
                 if (SPARKLE_ON_XBOX)
                 {
-                    xboxone_set_savedata_user(__xboxUser);
+                    xboxone_set_savedata_user(_system.__xboxUser);
                 }
                 
                 var _buffer = __SparkleEmptyBuffer();

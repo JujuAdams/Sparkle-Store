@@ -90,7 +90,7 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
         {
             if (SparkleGetWindowsUseGDK())
             {
-                xboxone_set_savedata_user(__xboxUser);
+                xboxone_set_savedata_user(_system.__xboxUser);
                 gdk_save_group_begin($"root/{__groupName}"); //Recommended by YYG for cross-platform save support
                 gdk_save_buffer(__buffer, __filename, __offset, __size);
                 __asyncID = gdk_save_group_end();
@@ -99,7 +99,7 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
             {
                 if (SPARKLE_ON_XBOX)
                 {
-                    xboxone_set_savedata_user(__xboxUser);
+                    xboxone_set_savedata_user(_system.__xboxUser);
                 }
                 
                 buffer_async_group_begin(__groupName);

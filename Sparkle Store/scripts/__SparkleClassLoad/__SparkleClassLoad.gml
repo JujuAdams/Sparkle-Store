@@ -94,14 +94,14 @@ function __SparkleClassLoad(_filename, _callback) constructor
             
             if (SparkleGetWindowsUseGDK())
             {
-                xboxone_set_savedata_user(__xboxUser);
+                xboxone_set_savedata_user(_system.__xboxUser);
                 __asyncID = gdk_load_buffer(__buffer, $"root/{__groupName}/{__filename}", 0, -1); //Recommended by YYG for cross-platform save support
             }
             else
             {
                 if (SPARKLE_ON_XBOX)
                 {
-                    xboxone_set_savedata_user(__xboxUser);
+                    xboxone_set_savedata_user(_system.__xboxUser);
                 }
                 
                 buffer_async_group_begin(__groupName);
