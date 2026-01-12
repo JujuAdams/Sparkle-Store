@@ -10,6 +10,6 @@ function xboxone_user_for_pad_safe(_gamepad)
     }
     catch(_error)
     {
-        return pointer_null;
+        return int64(0);
     }
 }
