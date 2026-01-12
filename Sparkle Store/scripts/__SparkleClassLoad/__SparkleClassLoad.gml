@@ -66,13 +66,27 @@ function __SparkleClassLoad(_filename, _callback) constructor
         
         if (SparkleGetSteamCloud())
         {
+            var _status = SPARKLE_STATUS_FAILED;
+            
             if (steam_file_exists($"{__groupName}/{__filename}"))
             {
                 __buffer = steam_file_read_buffer($"{__groupName}/{__filename}");
-                if (__buffer < 0) __buffer = undefined;
+                
+                if (__buffer < 0)
+                {
+                    __buffer = buffer_create(1, buffer_grow, 1);
+                }
+                else
+                {
+                    _status = SPARKLE_STATUS_SUCCESS;
+                }
+            }
+            else
+            {
+                __buffer = buffer_create(1, buffer_grow, 1);
             }
             
-            __Complete((__buffer == undefined)? SPARKLE_STATUS_FAILED : SPARKLE_STATUS_SUCCESS);
+            __Complete(_status);
         }
         else
         {
