@@ -13,7 +13,8 @@ function SparkleGetSavePending()
     var _i = 0;
     repeat(array_length(_queuedArray))
     {
-        if (_queuedArray[_i].GetOperation() == SPARKLE_OP_SAVE)
+        var _operation = _queuedArray[_i].GetOperation();
+        if ((_operation == SPARKLE_OP_SAVE) || (_operation == SPARKLE_OP_DELETE))
         {
             ++_count;
         }

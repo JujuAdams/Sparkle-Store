@@ -33,7 +33,8 @@ with(__SparkleSystem())
         var _totalPending = array_length(__savePendingArray) + array_length(__loadPendingArray);
         
         var _opStruct = array_first(__queuedArray);
-        if (_opStruct.GetOperation() == SPARKLE_OP_SAVE)
+        var _operation = _opStruct.GetOperation();
+        if ((_operation == SPARKLE_OP_SAVE) || (_operation == SPARKLE_OP_DELETE))
         {
             var _recentCount = array_length(__saveActivityArray);
             if ((_recentCount < SPARKLE_MAX_SAVE_FREQUENCY) && (_totalPending < max(1, __SPARKLE_MAX_SIMULTANEOUS_OPERATIONS)))

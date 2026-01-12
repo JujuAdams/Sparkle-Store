@@ -33,7 +33,7 @@ function __SparkleClassDelete(_filename, _callback) constructor
     
     static GetOperation = function()
     {
-        return SPARKLE_OP_SAVE;
+        return SPARKLE_OP_DELETE;
     }
     
     static Cancel = function()

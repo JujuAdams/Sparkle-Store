@@ -6,6 +6,9 @@
 /// priority using one of the `SPARKLE_PRIORITY_*` constants. Please see `__SparkleConstants` for
 /// more information.
 /// 
+/// N.B. For compatibility with `SparkleDelete()` on consoles, very small empty files will be
+///      treated as though they don't exist.
+/// 
 /// The callback for this function will be dispatched with two parameters:
 /// 
 /// argument0: The "status" of the load operation. This is one of the `SPARKLE_STATUS_*`
