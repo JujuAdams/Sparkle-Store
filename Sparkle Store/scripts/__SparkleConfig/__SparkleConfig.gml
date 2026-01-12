@@ -26,11 +26,3 @@
 // conservative and are designed to offer extra wiggle room without violating guidelines.
 #macro SPARKLE_MAX_SAVE_FREQUENCY  (SPARKLE_ON_SWITCH? 25 : infinity)
 #macro SPARKLE_MAX_LOAD_FREQUENCY  (SPARKLE_ON_SWITCH? 25 : infinity)
-
-// Maximum number of operations (saves and loads combined) allowed at the same time. A value of `1`
-// is the safest as it ensures that prior operations complete fully before starting another.
-// 
-// N.B. This macro is internally forced to `1` on consoles to work around limitations with
-//      GameMaker's native file operations.
-// 
-#macro SPARKLE_MAX_SIMULTANEOUS_OPERATIONS  1
