@@ -107,9 +107,8 @@ function __SparkleClassDelete(_filename, _callback) constructor
                     buffer_async_group_option("savepadindex", __psGamepadIndex);
                 }
                 
-                if (SPARKLE_ON_PS5)
+                if (__SPARKLE_PS_SAVE_BACKUP)
                 {
-                    //Always save backups
                     buffer_async_group_option("ps_create_backup", true);
                 }
                 

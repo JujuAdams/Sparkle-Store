@@ -23,7 +23,7 @@ with(__SparkleSystem())
         {
             if (_status)
             {
-                if (SPARKLE_ON_PS5)
+                if (__SPARKLE_PS_SAVE_BACKUP)
                 {
                     if (SPARKLE_VERBOSE)
                     {

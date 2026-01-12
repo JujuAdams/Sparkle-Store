@@ -112,9 +112,8 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
                     buffer_async_group_option("subtitle",     __slotSubtitle);
                 }
                 
-                if (SPARKLE_ON_PS5)
+                if (__SPARKLE_PS_SAVE_BACKUP)
                 {
-                    //Always save backups
                     buffer_async_group_option("ps_create_backup", true);
                 }
                 
