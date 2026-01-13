@@ -5,7 +5,11 @@
 /// will be saved. You can also specify a priority using one of the `SPARKLE_PRIORITY_*` constants.
 /// Please see `__SparkleConstants` for more information.
 /// 
-/// The callback for this function will be dispatched with two parameters:
+/// N.B. The filename you provide must be a simple filename and not a path that includes directory
+///      changes. If you would like to save into a particular directory within the file system
+///      sandbox, please use `SparkleSetGroupName()`. Saving outside the sandbox is not supported.
+/// 
+/// The callback for this function will be executed with two parameters:
 /// 
 /// argument0: The "status" of the save operation. This is one of the `SPARKLE_STATUS_*`
 ///            constants. Please see the `__SparkleConstants` script for more information.

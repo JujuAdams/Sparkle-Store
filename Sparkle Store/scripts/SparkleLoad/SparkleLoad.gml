@@ -7,9 +7,13 @@
 /// more information.
 /// 
 /// N.B. For compatibility with `SparkleDelete()` on consoles, very small empty files will be
-///      treated as though they don't exist.
+///      treated as though they don't exist and load operations will return as failed.
 /// 
-/// The callback for this function will be dispatched with two parameters:
+/// N.B. The filename you provide must be a simple filename and not a path that includes directory
+///      changes. If you would like to load from a particular directory within the file system
+///      sandbox, please use `SparkleSetGroupName()`. Loading outside the sandbox is not supported.
+/// 
+/// The callback for this function will be executed with two parameters:
 /// 
 /// argument0: The "status" of the load operation. This is one of the `SPARKLE_STATUS_*`
 ///            constants. Please see the `__SparkleConstants` script for more information.

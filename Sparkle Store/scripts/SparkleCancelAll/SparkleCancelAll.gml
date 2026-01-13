@@ -1,5 +1,8 @@
 // Feather disable all
 
+/// Cancels all current pending operations. If you set the optional `executeCallbacks` parameter to
+/// `true` then callbacks for the operations will be executed as "failed".
+/// 
 /// @param [executeCallbacks=false]
 
 function SparkleCancelAll(_executeCallbacks = false)

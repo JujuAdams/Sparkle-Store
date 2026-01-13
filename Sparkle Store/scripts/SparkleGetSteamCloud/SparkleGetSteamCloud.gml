@@ -1,6 +1,7 @@
 // Feather disable all
 
 /// Returns if Steam Cloud is enabled. The requires all of the following to be true:
+/// 
 /// - The game is running on Windows, MacOS, or Linux
 /// - The game is using YoYoGames' Steamworks extension
 /// - Steam is open and running
@@ -10,7 +11,8 @@
 /// - The user has enabled Steam Cloud for their account
 /// 
 /// Please note that `SPARKLE_ALLOW_STEAM_FILE` and `SoarkleSetSteamFile()` can alter where and
-/// how files are saved/loaded.
+/// how files are saved/loaded. If either is `false`, files will be saved to local storage and
+/// won't necesarily be backed up using Steam Cloud.
 
 function SparkleGetSteamCloud()
 {

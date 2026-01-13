@@ -1,11 +1,17 @@
 // Feather disable all
 
-/// Deletes a file. This is considered to be a "save" operation.
+/// Deletes a file. This is considered to be a "save" operation internally and this function will
+/// increment `SparkleGetSavePending()` and `SparkleGetSaveRecent()` in particular.
 /// 
 /// N.B. On console platforms, GameMaker does not allow you to directly delete a file. Instead,
-///      Sparkle Store will save a small empty file.
+///      Sparkle Store will save a very small empty file.
 /// 
-/// The callback for this function will be dispatched with one parameter:
+/// N.B. The filename you provide must be a simple filename and not a path that includes directory
+///      changes. If you would like to delete a file from a particular directory within the file
+///      system sandbox, please use `SparkleSetGroupName()`. Deleting files outside the sandbox is
+///      not supported.
+/// 
+/// The callback for this function will be executed with one parameter:
 /// 
 /// argument0: The "status" of the delete operation. This is one of the `SPARKLE_STATUS_*`
 ///            constants. Please see the `__SparkleConstants` script for more information.
