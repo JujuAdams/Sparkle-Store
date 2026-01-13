@@ -12,6 +12,16 @@
 
 &nbsp;
 
+## What is Sparkle Store?
+
+Sparkle Store is a set of helper functions that wrap around GameMaker's native buffer functions and makes saving and loading savedata more convenient and more robust. Internally, the file access flow is handled so that every platform behaves in similar and predictable ways without you needing to figure out the correct steps yourself. The goal is that you can build your game with Sparkle Store on one platform and then deploy that game onto other platforms with the minimum amount of work.
+
+All file access - save, load, delete - is done using asynchronous functions. These are the only functions that are guaranteed to work in all situations cross-platform. Sparkle Store uses function callbacks rather than GameMaker's native async event system. This architecture is far easier to use and lends itself to better organisation of your code.
+
+Sparkle Store can save and load binary buffers as you'd expect but it can also save strings, JSON, sprites, and surfaces. These are built safely such that corrupted or unexpected data is handled gracefully with a fail state instead of crashing your game.
+
+&nbsp;
+
 ## Desktop (without Steam), Android, iOS
 
 Sparkle Store will save into the file system sandbox on these platforms. You may configre what sandbox directory files are saved to by calling `SparkleSetGroupName()` or setting `SPARKLE_DEFAULT_GROUP_NAME`. You may set an optional group name (and therefore directory) when running from the IDE by setting `SPARKLE_IDE_GROUP_NAME`.
