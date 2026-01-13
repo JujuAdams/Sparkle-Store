@@ -9,3 +9,57 @@
 - ### Got questions? [Make a new issue!](https://github.com/JujuAdams/sparkle-store/issues/new)
 - ### There is also a [Discord server](https://discord.gg/hwgWpnsNw2) (but GitHub issues are preferred)
 - ### [Download the .yymps](https://github.com/JujuAdams/sparkle-store/releases/)
+
+&nbsp;
+
+## Desktop (without Steam), Android, iOS
+
+Sparkle Store will save into the file system sandbox on these platforms. You may configre what directory inside the sandbox files are saved to by calling `SparkleSetGroupName()` or setting `SPARKLE_DEFAULT_GROUP_NAME`. You may set an optional group name (and therefore directory) when running from the IDE by setting `SPARKLE_IDE_GROUP_NAME`.
+
+**N.B.** Saving outside of the sandbox is not supported.
+
+&nbsp;
+
+## Steam
+
+By default, Sparkle Store will behave the same as on desktop platforms by saving and loading files from local storage (see above).
+
+However, if you have enabled Steam Cloud for your game then Sparkle Store will attempt to use `steam_file_*()` functions to save files to Steam Cloud without accessing local storage at all. If you would like to use Steam Cloud in a different configuration, such as automatically backing up contents of the sandbox directory, then you should set `SPARKLE_ALLOW_STEAM_FILE` to `false`. You can further toggle whether a specific file should be accessed using `steam_file_*()` functions by calling `SoarkleSetSteamFile()`.
+
+&nbsp;
+
+## Nintendo Switch
+
+`switch_save_data_commit()` is called automatically for each file that is saved successfully. File save and load rate limits are automatically enforced by Sparkle Store. You can adjust the rate limiting by editing `SPARKLE_MAX_SAVE_FREQUENCY` and `SPARKLE_MAX_LOAD_FREQUENCY`.
+
+**N.B.** Files are saved and loaded for the current savedata user. If you would like to save and load files for another user, you will need to call the mount and unmount functions yourself.
+
+**N.B.** I do not have access to a Switch 2 for testing. My understanding is that little in the API has changed. Please get in touch if adjustments need to be made for Switch 2.
+
+&nbsp;
+
+## PlayStation
+
+You must call `SparkleSetPSGamepadIndex()` to set the player whose savedata you're going to access. You may also choose to call `SparkleSetPSShowDialog()` to control whether the save/load OS dialog is shown. On this platform, you will also want to set `SPARKLE_CONSOLE_SLOT_TITLE` and `SPARKLE_CONSOLE_SUBTITLE` so that the correct information is shown in the OS. You can adjust the current slot title and slot subtitle at runtime using the associated functions. Sparkle Store will automatically use the backup system on PlayStation 4.
+
+**N.B.** Sparkle Store only supports SDK 12.0 and above.
+
+&nbsp;
+
+## Xbox GDK
+
+You must call `SparkleSetXboxUser()` to set the player whose savedata you're going to access. When running on Windows and are using the GDK, you must call `SparkleSetWindowsUseGDK()` immediately when the game boots to ensure that the correct savedata functions are called. GDK file access will not work unless `gdk_init()` and `gdk_update()` are being used correctly so bear that in mind during testing.
+
+**N.B.** Sparkle Store does not support the legacy XDK API.
+
+&nbsp;
+
+## HTML5
+
+This platform is unsupported. It'll probably work fine but no support is provided.
+
+&nbsp;
+
+## Other Platforms (Opera GX etc.)
+
+These platforms have not been tested and are not officially supported by Sparkle Store. However, the underlying code that is used by Sparkle Store conforms to standard GameMaker practices. Saving and loading on unofficial platforms should work fine.
