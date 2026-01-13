@@ -14,7 +14,7 @@
 
 ## Desktop (without Steam), Android, iOS
 
-Sparkle Store will save into the file system sandbox on these platforms. You may configre what directory inside the sandbox files are saved to by calling `SparkleSetGroupName()` or setting `SPARKLE_DEFAULT_GROUP_NAME`. You may set an optional group name (and therefore directory) when running from the IDE by setting `SPARKLE_IDE_GROUP_NAME`.
+Sparkle Store will save into the file system sandbox on these platforms. You may configre what sandbox directory files are saved to by calling `SparkleSetGroupName()` or setting `SPARKLE_DEFAULT_GROUP_NAME`. You may set an optional group name (and therefore directory) when running from the IDE by setting `SPARKLE_IDE_GROUP_NAME`.
 
 **N.B.** Saving outside of the sandbox is not supported.
 
@@ -32,7 +32,7 @@ However, if you have enabled Steam Cloud for your game then Sparkle Store will a
 
 `switch_save_data_commit()` is called automatically for each file that is saved successfully. File save and load rate limits are automatically enforced by Sparkle Store. You can adjust the rate limiting by editing `SPARKLE_MAX_SAVE_FREQUENCY` and `SPARKLE_MAX_LOAD_FREQUENCY`.
 
-**N.B.** Files are saved and loaded for the current savedata user. If you would like to save and load files for another user, you will need to call the mount and unmount functions yourself.
+**N.B.** Files are saved and loaded for the user that opened the game (which is GameMaker's default behaviour). You will most likely want to use the `Required` option in the `Console account selection at startup` section of your game's .nmeta file. If you would like to save and load files for another user, you will need to call the mount and unmount functions yourself.
 
 **N.B.** I do not have access to a Switch 2 for testing. My understanding is that little in the API has changed. Please get in touch if adjustments need to be made for Switch 2.
 
