@@ -19,7 +19,7 @@ function __SparkleClassLoad(_filename, _callback) constructor
     __slotTitle      = _system.__slotTitle;
     __slotSubtitle   = _system.__slotSubtitle;
     __xboxUser       = _system.__xboxUser;
-    __trySteamCloud  = _system.__trySteamCloud;
+    __steamFile      = _system.__steamFile;
     
     if (SPARKLE_VERBOSE)
     {
@@ -65,7 +65,7 @@ function __SparkleClassLoad(_filename, _callback) constructor
         
         array_push(_loadActivityArray, self);
         
-        if (__trySteamCloud && __SparkleGetSteamCloudInternal())
+        if (__steamFile && SparkleGetSteamCloud())
         {
             var _status = SPARKLE_STATUS_FAILED;
             

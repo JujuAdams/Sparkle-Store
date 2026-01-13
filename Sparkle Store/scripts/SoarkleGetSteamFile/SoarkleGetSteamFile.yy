@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"SoarkleGetTrySteamCloud",
+  "%Name":"SoarkleGetSteamFile",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"SoarkleGetTrySteamCloud",
+  "name":"SoarkleGetSteamFile",
   "parent":{
     "name":"Options",
     "path":"folders/Sparkle Store/Options.yy",

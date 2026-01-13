@@ -27,7 +27,7 @@ function __SparkleSystem()
         __psGamepadIndex = -1;
         __windowsUseGDK  = false;
         __xboxUser       = int64(0);
-        __trySteamCloud  = SPARKLE_ALLOW_STEAM_CLOUD;
+        __steamFile  = SPARKLE_ALLOW_STEAM_FILE;
         
         __queuedArray = [];
         

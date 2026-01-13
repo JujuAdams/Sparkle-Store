@@ -26,7 +26,7 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
     __slotTitle      = _system.__slotTitle;
     __slotSubtitle   = _system.__slotSubtitle;
     __xboxUser       = _system.__xboxUser;
-    __trySteamCloud  = _system.__trySteamCloud;
+    __steamFile      = _system.__steamFile;
     
     if (SPARKLE_VERBOSE)
     {
@@ -71,7 +71,7 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback) const
         
         array_push(_saveActivityArray, self);
         
-        if (__trySteamCloud && __SparkleGetSteamCloudInternal())
+        if (__steamFile && SparkleGetSteamCloud())
         {
             if ((__offset != 0) || (buffer_get_size(__buffer) != __size))
             {

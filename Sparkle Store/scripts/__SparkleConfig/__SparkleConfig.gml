@@ -1,5 +1,9 @@
 // Feather disable all
 
+// Whether to log Sparkle Store operations. This is helpful when debugging your game but ordinarily
+// can be left turned off.
+#macro SPARKLE_VERBOSE  false
+
 // Group name to initialize to when Sparkle Store boots up. This can be overriden later by calling
 // `SparkleSetGroupName()`. The group name determines the save directory that a file gets placed
 // into on most (but not all!) platforms. Please refer to savefile documentation for consoles for
@@ -17,13 +21,17 @@
 #macro SPARKLE_CONSOLE_SLOT_TITLE  "GameWithName"
 #macro SPARKLE_CONSOLE_SUBTITLE    "Game savedata"
 
-// Whether Steam Cloud is allowed. Setting this to `false` will ignore Steam Cloud and will save
-// and load files to local storage. Please see `SparkleGetSteamCloud()` for more information.
-#macro SPARKLE_ALLOW_STEAM_CLOUD  true
-
-// Whether to log Sparkle Store operations. This is helpful when debugging your game but ordinarily
-// can be left turned off.
-#macro SPARKLE_VERBOSE  true
+// Whether Sparkle Store is allowed to use `steam_file_*` functions to save and load data if Steam
+// Cloud has been enabled for the game. If you disallow `steam_file_*` functions, Sparkle Store
+// will always save data to local storage regardless of whether Steam Cloud has been enabled. You
+// can further toggle the use of `steam_file_*` functions by using `SparkleSetSteamFile()` which is
+// useful to save particular files to local storage rather than into the cloud (e.g. for local
+// settings files).
+// 
+// This macro should usually be set to `true`. If you want to use Steam Cloud's automatic savedata
+// backup system (where files found into a particular directory are backed up without needing to
+// write any code) then set this macro to `false`.
+#macro SPARKLE_ALLOW_STEAM_FILE  true
 
 // Maximum number of save/load operations that can be completed in a minute. These numbers are
 // used to calculate the delays between operations. Default values for Nintendo Switch are
