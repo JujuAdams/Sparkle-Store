@@ -2,6 +2,7 @@
 
 with(__SparkleSystem())
 {
+    //Clean up recent activity arrays
     while(array_length(__saveActivityArray) > 0)
     {
         if (current_time - __saveActivityArray[0].__activityTime > 60_000)

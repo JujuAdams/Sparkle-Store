@@ -25,12 +25,12 @@ if (SPARKLE_ON_XBOX || SparkleGetWindowsUseGDK())
 _string += "\n";
 
 _string += string_join("\n",
-$"Total pending = {SparkleGetTotalPending()}",
-$"Save pending  = {SparkleGetSavePending()}",
-$"Save recent   = {SparkleGetSaveRecent()}",
-$"Load pending  = {SparkleGetLoadPending()}",
-$"Load recent   = {SparkleGetLoadRecent()}",
-$"Activity      = {SparkleGetActivity()? "true" : "false"}",
+$"Total pending   = {SparkleGetTotalPending()}",
+$"Save pending    = {SparkleGetSavePending()}",
+$"Save recent     = {SparkleGetSaveRecent()}",
+$"Load pending    = {SparkleGetLoadPending()}",
+$"Load recent     = {SparkleGetLoadRecent()}",
+$"Recent activity = {SparkleGetRecentActivity()? "true" : "false"}",
 " ",
 "Press gp_start to focus a gamepad. Press any keyboard key to focus the keyboard",
 "Use arrow keys or dpad to choose an option. Press space/gp_face1 to select an option",

@@ -3,7 +3,6 @@
 with(__SparkleSystem())
 {
     var _id        = async_load[? "id"    ];
-    var _error     = async_load[? "error" ];
     var _rawStatus = async_load[? "status"];
     
     if (SPARKLE_ON_SWITCH || SPARKLE_ON_PS_ANY || SPARKLE_ON_XBOX)

@@ -3,9 +3,9 @@
 /// Returns whether there was save/load activity recently within the given timespan. This is
 /// useful for setting up a save/load indicator in your game's UI.
 /// 
-/// @param [milliseconds=1000]
+/// @param [milliseconds=1200]
 
-function SparkleGetActivity(_milliseconds = 1000)
+function SparkleGetRecentActivity(_milliseconds = 1200)
 {
     static _system = __SparkleSystem();
     

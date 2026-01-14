@@ -56,7 +56,7 @@ if (keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(gamepadFoc
     SparkleCancelAll();
 }
 
-if ((watchStart != undefined) && (not SparkleGetActivity(0)))
+if ((watchStart != undefined) && (not SparkleGetRecentActivity(0)))
 {
     show_debug_message($"Operation lasted {current_time - watchStart}ms");
     watchStart = undefined;
