@@ -11,8 +11,8 @@
 /// argument0: The "status" of the load operation. This is one of the `SPARKLE_STATUS_*`
 ///            constants. Please see the `__SparkleConstants` script for more information.
 /// 
-/// argument1: The sprite (struct/array assembly) that was found in the file. If there was a
-///            problem or the file was empty then this parameter will be set to `-1`.
+/// argument1: The sprite that was found in the file. If there was a problem or the file was empty
+///            then this parameter will be set to `-1`.
 /// 
 /// @param filename
 /// @param callback
@@ -63,5 +63,5 @@ function SparkleLoadSprite(_filename, _callback, _callbackMetadata = undefined, 
         __callback(_status, _sprite, _callbackMetadata);
     });
     
-    return SparkleLoad(_filename, _newCallback, _callbackMetadata, _priority);
+    return SparkleLoadSurface(_filename, _newCallback, _callbackMetadata, _priority);
 }
