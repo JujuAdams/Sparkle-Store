@@ -23,8 +23,8 @@ function __SparkleSystem()
         
         __steamFile = SPARKLE_ALLOW_STEAM_FILE;
         
-        __psSlotTitle    = SPARKLE_CONSOLE_SLOT_TITLE;
-        __psSlotSubtitle = SPARKLE_CONSOLE_SUBTITLE;
+        __psSlotTitle    = SPARKLE_PLAYSTATION_SLOT_TITLE;
+        __psSlotSubtitle = SPARKLE_PLAYSTATION_SUBTITLE;
         __psShowDialog   = false;
         __psGamepadIndex = -1;
         
@@ -45,11 +45,11 @@ function __SparkleSystem()
         {
             if (SPARKLE_RUNNING_FROM_IDE)
             {
-                __SparkleError("`SPARKLE_CONSOLE_SLOT_TITLE` title must not contain spaces");
+                __SparkleError("`SPARKLE_PLAYSTATION_SLOT_TITLE` title must not contain spaces");
             }
             else
             {
-                __SparkleTrace("Warning! `SPARKLE_CONSOLE_SLOT_TITLE` must not contain spaces");
+                __SparkleTrace("Warning! `SPARKLE_PLAYSTATION_SLOT_TITLE` must not contain spaces");
                 __psSlotTitle = string_replace_all(__psSlotTitle, " ", "");
             }
         }

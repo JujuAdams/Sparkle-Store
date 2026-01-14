@@ -50,7 +50,7 @@ However, if you have enabled Steam Cloud for your game then Sparkle Store will a
 
 ## PlayStation
 
-You must call `SparkleSetPSGamepadIndex()` to set the player whose savedata you're going to access. You may also choose to call `SparkleSetPSShowDialog()` to control whether the save/load OS dialog is shown. On this platform, you will also want to set `SPARKLE_CONSOLE_SLOT_TITLE` and `SPARKLE_CONSOLE_SUBTITLE` so that the correct information is shown in the OS. You can adjust the current slot title and slot subtitle at runtime using the associated functions. Sparkle Store will automatically use the backup system on PlayStation 4.
+You must call `SparkleSetPSGamepadIndex()` to set the player whose savedata you're going to access. You may also choose to call `SparkleSetPSShowDialog()` to control whether the save/load OS dialog is shown. On this platform, you will also want to set `SPARKLE_PLAYSTATION_SLOT_TITLE` and `SPARKLE_PLAYSTATION_SUBTITLE` so that the correct information is shown in the OS. You can adjust the current slot title and slot subtitle at runtime using the associated functions. Sparkle Store will automatically use the backup system on PlayStation 4.
 
 **N.B.** Sparkle Store only supports SDK 12.0 and above.
 

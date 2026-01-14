@@ -15,11 +15,10 @@
 // `SPARKLE_DEFAULT_GROUP_NAME` above. This is sometimes helpful when testing.
 #macro SPARKLE_IDE_GROUP_NAME  undefined
 
-// Default values for console-specific operations. You can change these values at runtime using the
-// relevant Sparkle Store functions. Please note that the slot title must not contain spaces for
-// compatibility cross-platform.
-#macro SPARKLE_CONSOLE_SLOT_TITLE  "GameWithName"
-#macro SPARKLE_CONSOLE_SUBTITLE    "Game savedata"
+// Default values for PlayStation savedata options. You can change these values at runtime using
+// the relevant Sparkle Store functions. Please note that the slot title must not contain spaces.
+#macro SPARKLE_PLAYSTATION_SLOT_TITLE  "GameWithName"
+#macro SPARKLE_PLAYSTATION_SUBTITLE    "Game savedata"
 
 // Whether Sparkle Store is allowed to use `steam_file_*` functions to save and load data (provided
 // Steam Cloud has been enabled for the game). If you disallow `steam_file_*` functions, Sparkle

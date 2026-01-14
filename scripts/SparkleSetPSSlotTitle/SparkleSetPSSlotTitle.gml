@@ -2,7 +2,7 @@
 
 /// Sets the current PlayStation slot title for future save/load operations. This value will not
 /// impact any operations that have already been started. Please note that the slot title must not
-/// contain spaces for compatibility cross-platform.
+/// contain spaces.
 /// 
 /// @param slotTitle
 
