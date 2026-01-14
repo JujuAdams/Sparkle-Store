@@ -31,10 +31,15 @@
 #macro SPARKLE_PRIORITY_NORMAL  0
 
 // The operation will be added to the front of the queue and will be dispatched at the nearest
-// opportunity ahead of enqueued operations.
+// opportunity ahead of enqueued operations. The operation will typically be dispatched at the
+// start of the next step.
 #macro SPARKLE_PRIORITY_HIGH  1
 
-// The operation will be dispatched immediately, ignoring any save/load rate limits.
+// The operation will be dispatched immediately, ignoring any save/load rate limits or ordering.
+// 
+// N.B. Use of IMMEDIATE priority is potentially dangerous when running on consoles as it can
+//      corrupt savedata, especially on PlayStation. Make sure you thoroughly test your code if
+//      you use this priority.
 #macro SPARKLE_PRIORITY_IMMEDIATE  2
 
 ///////
