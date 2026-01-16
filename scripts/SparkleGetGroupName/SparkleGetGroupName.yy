@@ -6,7 +6,7 @@
   "name":"SparkleGetGroupName",
   "parent":{
     "name":"Options",
-    "path":"folders/Sparkle Store/Options.yy",
+    "path":"folders/SparkleStore/Options.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

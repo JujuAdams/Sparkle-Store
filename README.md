@@ -1,4 +1,4 @@
-<h1 align="center">Sparkle Store 1.3.0</h1>
+<h1 align="center">SparkleStore 1.3.0</h1>
 
 <p align="center">Cross-platform file save/load for GameMaker 2024.14</p>
 
@@ -6,25 +6,25 @@
 
 &nbsp;
 
-- ### Got questions? [Make a new issue!](https://github.com/JujuAdams/sparkle-store/issues/new)
+- ### Got questions? [Make a new issue!](https://github.com/JujuAdams/SparkleStore/issues/new)
 - ### There is also a [Discord server](https://discord.gg/hwgWpnsNw2) (but GitHub issues are preferred)
-- ### [Download the .yymps](https://github.com/JujuAdams/sparkle-store/releases/)
+- ### [Download the .yymps](https://github.com/JujuAdams/SparkleStore/releases/)
 
 &nbsp;
 
-## What is Sparkle Store?
+## What is SparkleStore?
 
-Sparkle Store is a set of helper functions that wrap around GameMaker's native buffer functions and makes saving and loading savedata more convenient and more robust. Internally, the file access flow is handled so that every platform behaves in similar and predictable ways without you needing to figure out the correct steps yourself. The goal is that you can build your game with Sparkle Store on one platform and then deploy that game onto other platforms with the minimum amount of work.
+SparkleStore is a set of helper functions that wrap around GameMaker's native buffer functions and makes saving and loading savedata more convenient and more robust. Internally, the file access flow is handled so that every platform behaves in similar and predictable ways without you needing to figure out the correct steps yourself. The goal is that you can build your game with SparkleStore on one platform and then deploy that game onto other platforms with the minimum amount of work.
 
-All file access - save, load, delete - is done using asynchronous functions. These are the only functions that are guaranteed in GameMaker to work in all situations cross-platform. Sparkle Store's API uses function callbacks rather than you having to built inside of the clumsy GameMaker async event system. Callbacks are far easier to use and lend themselves to better organisation of code.
+All file access - save, load, delete - is done using asynchronous functions. These are the only functions that are guaranteed in GameMaker to work in all situations cross-platform. SparkleStore's API uses function callbacks rather than you having to built inside of the clumsy GameMaker async event system. Callbacks are far easier to use and lend themselves to better organisation of code.
 
-Sparkle Store can save and load binary buffers as you'd expect but it can also save strings, JSON, sprites, and surfaces. These are built safely such that corrupted or unexpected data is handled gracefully with a fail state instead of crashing your game.
+SparkleStore can save and load binary buffers as you'd expect but it can also save strings, JSON, sprites, and surfaces. These are built safely such that corrupted or unexpected data is handled gracefully with a fail state instead of crashing your game.
 
 &nbsp;
 
 ## Desktop (without Steam), Android, iOS
 
-Sparkle Store will save into the file system sandbox on these platforms. You may configre what sandbox directory files are saved to by calling `SparkleSetGroupName()` or setting `SPARKLE_DEFAULT_GROUP_NAME`. You may set an optional group name (and therefore directory) when running from the IDE by setting `SPARKLE_IDE_GROUP_NAME`.
+SparkleStore will save into the file system sandbox on these platforms. You may configre what sandbox directory files are saved to by calling `SparkleSetGroupName()` or setting `SPARKLE_DEFAULT_GROUP_NAME`. You may set an optional group name (and therefore directory) when running from the IDE by setting `SPARKLE_IDE_GROUP_NAME`.
 
 **N.B.** Saving outside of the sandbox is not supported.
 
@@ -32,9 +32,9 @@ Sparkle Store will save into the file system sandbox on these platforms. You may
 
 ## Steam
 
-By default, Sparkle Store will behave the same as on desktop platforms by saving and loading files from local storage (see above).
+By default, SparkleStore will behave the same as on desktop platforms by saving and loading files from local storage (see above).
 
-However, if you have enabled Steam Cloud for your game (and Steam is open) then Sparkle Store will attempt to use `steam_file_*()` functions to save files to Steam Cloud without accessing local storage at all. If you would like to use Steam Cloud in a different configuration, such as automatically backing up contents of the sandbox directory, then you should set `SPARKLE_ALLOW_STEAM_FILE` to `false`. You can further toggle whether a specific file should be accessed using `steam_file_*()` functions by calling `SoarkleSetSteamFile()`.
+However, if you have enabled Steam Cloud for your game (and Steam is open) then SparkleStore will attempt to use `steam_file_*()` functions to save files to Steam Cloud without accessing local storage at all. If you would like to use Steam Cloud in a different configuration, such as automatically backing up contents of the sandbox directory, then you should set `SPARKLE_ALLOW_STEAM_FILE` to `false`. You can further toggle whether a specific file should be accessed using `steam_file_*()` functions by calling `SoarkleSetSteamFile()`.
 
 The above behaviour means that if you run the game *without Steam being open* (e.g. during development) you will save files to local storage in the sandbox area. This can be confusing because different files will be accessed depending on whether you have Steam open or not. No data will be *lost* however, just stored in a different location, and this will never happen for players because Steam must be open for the game to run anyway.
 
@@ -42,7 +42,7 @@ The above behaviour means that if you run the game *without Steam being open* (e
 
 ## Nintendo Switch
 
-`switch_save_data_commit()` is called automatically for each file that is saved successfully. File save and load rate limits are automatically enforced by Sparkle Store. You can adjust the rate limiting by editing `SPARKLE_MAX_SAVE_FREQUENCY` and `SPARKLE_MAX_LOAD_FREQUENCY`.
+`switch_save_data_commit()` is called automatically for each file that is saved successfully. File save and load rate limits are automatically enforced by SparkleStore. You can adjust the rate limiting by editing `SPARKLE_MAX_SAVE_FREQUENCY` and `SPARKLE_MAX_LOAD_FREQUENCY`.
 
 **N.B.** Files are saved and loaded for the user that opened the game (which is GameMaker's default behaviour). You will most likely want to use the `Required` option in the `Console account selection at startup` section of your game's .nmeta file. If you would like to save and load files for another user, you will need to call the mount and unmount functions yourself.
 
@@ -52,9 +52,9 @@ The above behaviour means that if you run the game *without Steam being open* (e
 
 ## PlayStation
 
-You must call `SparkleSetPSGamepadIndex()` to set the player whose savedata you're going to access. You may also choose to call `SparkleSetPSShowDialog()` to control whether the save/load OS dialog is shown. On this platform, you will also want to set `SPARKLE_PLAYSTATION_SLOT_TITLE` and `SPARKLE_PLAYSTATION_SUBTITLE` so that the correct information is shown in the OS. You can adjust the current slot title and slot subtitle at runtime using the associated functions. Sparkle Store will automatically use the backup system on PlayStation 4.
+You must call `SparkleSetPSGamepadIndex()` to set the player whose savedata you're going to access. You may also choose to call `SparkleSetPSShowDialog()` to control whether the save/load OS dialog is shown. On this platform, you will also want to set `SPARKLE_PLAYSTATION_SLOT_TITLE` and `SPARKLE_PLAYSTATION_SUBTITLE` so that the correct information is shown in the OS. You can adjust the current slot title and slot subtitle at runtime using the associated functions. SparkleStore will automatically use the backup system on PlayStation 4.
 
-**N.B.** Sparkle Store only supports SDK 12.00 and above.
+**N.B.** SparkleStore only supports SDK 12.00 and above.
 
 &nbsp;
 
@@ -62,10 +62,10 @@ You must call `SparkleSetPSGamepadIndex()` to set the player whose savedata you'
 
 You must call `SparkleSetXboxUser()` to set the player whose savedata you're going to access. When running on Windows and are using the GDK, you must call `SparkleSetWindowsUseGDK()` immediately when the game boots to ensure that the correct savedata functions are called. GDK file access will not work unless `gdk_init()` and `gdk_update()` are being used correctly so bear that in mind during testing.
 
-**N.B.** Sparkle Store does not support the legacy XDK API.
+**N.B.** SparkleStore does not support the legacy XDK API.
 
 &nbsp;
 
 ## Other Platforms (Opera GX etc.)
 
-These platforms have not been tested and are not officially supported by Sparkle Store. However, the underlying code that is used by Sparkle Store conforms to standard GameMaker practices. Saving and loading on unofficial platforms should work fine.
+These platforms have not been tested and are not officially supported by SparkleStore. However, the underlying code that is used by SparkleStore conforms to standard GameMaker practices. Saving and loading on unofficial platforms should work fine.

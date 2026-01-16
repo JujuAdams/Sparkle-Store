@@ -1,7 +1,7 @@
 // Feather disable all
 
 var _string = string_join("\n",
-$"Sparkle Store = {SPARKLE_VERSION}, {SPARKLE_DATE}",
+$"SparkleStore = {SPARKLE_VERSION}, {SPARKLE_DATE}",
 $"Time = {date_datetime_string(date_current_datetime())}",
 $"Gamepad focus = {gamepadFocus}",
 $"Group name    = \"{SparkleGetGroupName()}\"",

@@ -6,7 +6,7 @@
   "name":"SparkleSetXboxUser",
   "parent":{
     "name":"Xbox & GDK",
-    "path":"folders/Sparkle Store/Options/Xbox & GDK.yy",
+    "path":"folders/SparkleStore/Options/Xbox & GDK.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

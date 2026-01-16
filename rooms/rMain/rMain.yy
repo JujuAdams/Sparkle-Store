@@ -17,8 +17,8 @@
   ],
   "name":"rMain",
   "parent":{
-    "name":"Sparkle Store",
-    "path":"Sparkle Store.yyp",
+    "name":"SparkleStore",
+    "path":"SparkleStore.yyp",
   },
   "parentRoom":null,
   "physicsSettings":{

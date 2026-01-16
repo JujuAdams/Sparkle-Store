@@ -1,6 +1,6 @@
 // Feather disable all
 
-/// Returns whether Sparkle Store will try to use `steam_file_*()` functions when saving and
+/// Returns whether SparkleStore will try to use `steam_file_*()` functions when saving and
 /// loading files on desktop platforms, as set by `SoarkleSetSteamFile()`. This function will
 /// always return `false` if `SPARKLE_ALLOW_STEAM_FILE` is set to `false`.
 /// 

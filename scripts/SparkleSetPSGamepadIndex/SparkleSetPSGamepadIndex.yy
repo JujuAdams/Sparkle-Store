@@ -6,7 +6,7 @@
   "name":"SparkleSetPSGamepadIndex",
   "parent":{
     "name":"PlayStation",
-    "path":"folders/Sparkle Store/Options/PlayStation.yy",
+    "path":"folders/SparkleStore/Options/PlayStation.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

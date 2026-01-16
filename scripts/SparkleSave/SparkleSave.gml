@@ -19,7 +19,7 @@
 /// 
 /// argument2: The callback metadata specified when calling `SparkleSave()`.
 /// 
-/// This function returns a struct that contains private information that Sparkle Store needs to
+/// This function returns a struct that contains private information that SparkleStore needs to
 /// track file saving. The struct has no public variables. However, it has the following public
 /// methods:
 /// 

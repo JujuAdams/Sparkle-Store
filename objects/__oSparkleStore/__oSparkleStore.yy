@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"(System)",
-    "path":"folders/Sparkle Store/(System).yy",
+    "path":"folders/SparkleStore/(System).yy",
   },
   "parentObjectId":null,
   "persistent":true,

@@ -6,7 +6,7 @@
   "name":"SparkleGetSteamCloud",
   "parent":{
     "name":"Getters",
-    "path":"folders/Sparkle Store/Getters.yy",
+    "path":"folders/SparkleStore/Getters.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

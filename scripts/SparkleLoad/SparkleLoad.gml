@@ -1,7 +1,7 @@
 // Feather disable all
 
 /// Starts an asynchronous load operation for a buffer (or part of a buffer). If the load operation
-/// is successful, the contents of the file will be placed into a buffer that Sparkle Store creates
+/// is successful, the contents of the file will be placed into a buffer that SparkleStore creates
 /// for you. This buffer is then returned via the callback (see below). You can also specify a
 /// priority using one of the `SPARKLE_PRIORITY_*` constants. Please see `__SparkleConstants` for
 /// more information.
@@ -25,7 +25,7 @@
 /// 
 /// argument2: The callback metadata specified when calling `SparkleLoad()`.
 /// 
-/// This function returns a struct that contains private information that Sparkle Store needs to
+/// This function returns a struct that contains private information that SparkleStore needs to
 /// track file saving. The struct has no public variables. However, it has the following public
 /// methods:
 /// 

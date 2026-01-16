@@ -1,26 +1,26 @@
 // Feather disable all
 
-// Whether to log Sparkle Store operations. This is helpful when debugging your game but ordinarily
+// Whether to log SparkleStore operations. This is helpful when debugging your game but ordinarily
 // can be left turned off.
 #macro SPARKLE_VERBOSE  false
 
-// Group name to initialize to when Sparkle Store boots up. This can be overriden later by calling
+// Group name to initialize to when SparkleStore boots up. This can be overriden later by calling
 // `SparkleSetGroupName()`. The group name determines the save directory that a file gets placed
 // into on most (but not all!) platforms. Please refer to savefile documentation for consoles for
 // further information.
 #macro SPARKLE_DEFAULT_GROUP_NAME  "savedata"
 
 // Group name to initialize to when running from the IDE. Setting this macro to anything other than
-// `undefined` wil cause Sparkle Store to initialize the group name to the macro value, overriding
+// `undefined` wil cause SparkleStore to initialize the group name to the macro value, overriding
 // `SPARKLE_DEFAULT_GROUP_NAME` above. This is sometimes helpful when testing.
 #macro SPARKLE_IDE_GROUP_NAME  undefined
 
 // Default values for PlayStation savedata options. You can change these values at runtime using
-// the relevant Sparkle Store functions. Please note that the slot title must not contain spaces.
+// the relevant SparkleStore functions. Please note that the slot title must not contain spaces.
 #macro SPARKLE_PLAYSTATION_SLOT_TITLE  "GameWithName"
 #macro SPARKLE_PLAYSTATION_SUBTITLE    "Game savedata"
 
-// Whether Sparkle Store is allowed to use `steam_file_*` functions to save and load data (provided
+// Whether SparkleStore is allowed to use `steam_file_*` functions to save and load data (provided
 // Steam Cloud has been enabled for the game). If you disallow `steam_file_*` functions, Sparkle
 // Store will always save data to local storage regardless of whether Steam Cloud has been enabled.
 // You can further toggle the use of `steam_file_*` functions by using `SparkleSetSteamFile()` which

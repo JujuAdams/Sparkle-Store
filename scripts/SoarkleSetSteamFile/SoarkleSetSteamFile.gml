@@ -1,7 +1,7 @@
 // Feather disable all
 
-/// Sets whether Sparkle Store will try to use `steam_file_*()` functions when saving and loading
-/// files on desktop platforms. If you disallow `steam_file_*` functions, Sparkle Store will always
+/// Sets whether SparkleStore will try to use `steam_file_*()` functions when saving and loading
+/// files on desktop platforms. If you disallow `steam_file_*` functions, SparkleStore will always
 /// save data to local storage regardless of whether Steam Cloud has been enabled. This is useful
 /// to save particular files to local storage rather than into the cloud (e.g. for local settings
 /// files).

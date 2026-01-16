@@ -6,7 +6,7 @@
   "name":"SparkleLoadString",
   "parent":{
     "name":"Load",
-    "path":"folders/Sparkle Store/Load.yy",
+    "path":"folders/SparkleStore/Load.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

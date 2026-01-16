@@ -10,8 +10,8 @@
   "name":"oTest",
   "overriddenProperties":[],
   "parent":{
-    "name":"Sparkle Store",
-    "path":"Sparkle Store.yyp",
+    "name":"SparkleStore",
+    "path":"SparkleStore.yyp",
   },
   "parentObjectId":null,
   "persistent":false,

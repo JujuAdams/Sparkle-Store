@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"steam_update_safe",
   "parent":{
-    "name":"Sparkle Store",
-    "path":"Sparkle Store.yyp",
+    "name":"SparkleStore",
+    "path":"SparkleStore.yyp",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

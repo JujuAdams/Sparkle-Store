@@ -40,8 +40,8 @@
   "nineSlice":null,
   "origin":0,
   "parent":{
-    "name":"Sparkle Store",
-    "path":"Sparkle Store.yyp",
+    "name":"SparkleStore",
+    "path":"SparkleStore.yyp",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -6,7 +6,7 @@
   "name":"SparkleSaveString",
   "parent":{
     "name":"Save & Delete",
-    "path":"folders/Sparkle Store/Save & Delete.yy",
+    "path":"folders/SparkleStore/Save & Delete.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"__SparkleConfig",
   "parent":{
-    "name":"Sparkle Store",
-    "path":"folders/Sparkle Store.yy",
+    "name":"SparkleStore",
+    "path":"folders/SparkleStore.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

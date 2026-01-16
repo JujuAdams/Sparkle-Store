@@ -4,7 +4,7 @@
 /// increment `SparkleGetSavePending()` and `SparkleGetSaveRecent()` in particular.
 /// 
 /// N.B. On console platforms, GameMaker does not allow you to directly delete a file. Instead,
-///      Sparkle Store will save a very small empty file. Sparkle Store's load functions will then
+///      SparkleStore will save a very small empty file. SparkleStore's load functions will then
 ///      treat this empty file as missing entirely.
 /// 
 /// N.B. The filename you provide must be a simple filename and not a path that includes directory
@@ -19,7 +19,7 @@
 /// 
 /// argument1: The callback metadata specified when calling `SparkleDelete()`.
 /// 
-/// This function returns a struct that contains private information that Sparkle Store needs to
+/// This function returns a struct that contains private information that SparkleStore needs to
 /// track file saving. The struct has no public variables. However, it has the following public
 /// methods:
 /// 
