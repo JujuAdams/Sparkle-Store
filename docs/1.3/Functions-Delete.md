@@ -2,7 +2,7 @@
 
 &nbsp;
 
-## SparkleDelete
+## …Delete
 
 `SparkleDelete(filename, callback, callbackMetadata, [priority=normal])`
 
