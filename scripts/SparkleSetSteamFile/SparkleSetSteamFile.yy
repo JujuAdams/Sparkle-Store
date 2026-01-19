@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"SoarkleSetSteamFile",
+  "%Name":"SparkleSetSteamFile",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"SoarkleSetSteamFile",
+  "name":"SparkleSetSteamFile",
   "parent":{
     "name":"Options",
     "path":"folders/SparkleStore/Options.yy",

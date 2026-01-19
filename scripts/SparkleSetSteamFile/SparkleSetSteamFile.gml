@@ -13,7 +13,7 @@
 /// 
 /// @param state
 
-function SoarkleSetSteamFile(_state)
+function SparkleSetSteamFile(_state)
 {
     static _system = __SparkleSystem();
     
