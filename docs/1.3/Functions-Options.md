@@ -38,7 +38,7 @@ Returns the currently set group name for save/load operations.
 
 ## …SetSteamFile
 
-`SoarkleSetSteamFile(state)`
+`SparkleSetSteamFile(state)`
 
 **Returns:** N/A (`undefined`)
 
@@ -56,7 +56,7 @@ This setting will be used for future save/load operations but will not impact an
 
 ## …GetSteamFile
 
-`SoarkleGetSteamFile()`
+`SparkleGetSteamFile()`
 
 **Returns:** boolean
 
@@ -64,7 +64,7 @@ This setting will be used for future save/load operations but will not impact an
 |----|--------|-------|
 |N/A |        |       |
 
-Returns whether SparkleStore will try to use `steam_file_*()` functions when saving and loading files on desktop platforms, as set by `SoarkleSetSteamFile()`. This function will always return `false` if `SPARKLE_ALLOW_STEAM_FILE` is set to `false`.
+Returns whether SparkleStore will try to use `steam_file_*()` functions when saving and loading files on desktop platforms, as set by `SparkleSetSteamFile()`. This function will always return `false` if `SPARKLE_ALLOW_STEAM_FILE` is set to `false`.
 
 Please see documentation for `SPARKLE_ALLOW_STEAM_FILE` for more information.
 
