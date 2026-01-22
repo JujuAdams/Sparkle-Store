@@ -62,13 +62,66 @@
 
 function SparkleExist(_filename, _forceLoad = false, _callback = undefined, _callbackMetadata = undefined, _priority = SPARKLE_PRIORITY_NORMAL)
 {
-    static _presenceCacheMap = __SparkleSystem().__presenceCacheMap;
+    static _system           = __SparkleSystem();
+    static _presenceCacheMap = _system.__presenceCacheMap;
+    static _queuedArray      = _system.__queuedArray;
+    static _loadPendingArray = _system.__loadPendingArray;
     
     var _fileCacheKey = __SparkleFileCacheKey(_filename);
     var _status = _presenceCacheMap[? _fileCacheKey];
     
     if (_forceLoad || (_status == undefined))
     {
+        //Search to see if we have a pending operation targetting this file already
+        var _i = 0;
+        repeat(array_length(_queuedArray))
+        {
+            var _operation = _queuedArray[_i];
+            if ((_operation.__opType == SPARKLE_OP_EXIST) && is_callable(_operation.__callback) && (_operation.__fileCacheKey == _fileCacheKey))
+            {
+                if (is_callable(_callback))
+                {
+                    if (SPARKLE_RUNNING_FROM_IDE)
+                    {
+                        __SparkleTrace($"Warning! Callback for `SparkleExist()` targeting \"{_filename}\" will never execute, an existing callback has already been queued          {debug_get_callstack()}");
+                    }
+                    else
+                    {
+                        __SparkleTrace($"Warning! Callback for `SparkleExist()` targeting \"{_filename}\" will never execute, an existing callback has already been queued");
+                    }
+                }
+                
+                return undefined;
+            }
+            
+            ++_i;
+        }
+        
+        var _i = 0;
+        repeat(array_length(_loadPendingArray))
+        {
+            var _operation = _loadPendingArray[_i];
+            if ((_operation.__opType == SPARKLE_OP_EXIST) && is_callable(_operation.__callback) && (_operation.__fileCacheKey == _fileCacheKey))
+            {
+                if (is_callable(_callback))
+                {
+                    if (SPARKLE_RUNNING_FROM_IDE)
+                    {
+                        __SparkleTrace($"Warning! Callback for `SparkleExist()` targeting \"{_filename}\" will never execute, an existing callback has already been queued          {debug_get_callstack()}");
+                    }
+                    else
+                    {
+                        __SparkleTrace($"Warning! Callback for `SparkleExist()` targeting \"{_filename}\" will never execute, an existing callback has already been queued");
+                    }
+                }
+                
+                return undefined;
+            }
+            
+            ++_i;
+        }
+        
+        //Create a new operation and shim the callback
         var _operation = SparkleLoad(_filename, function(_status, _buffer, _callbackMetadata)
         {
             buffer_delete(_buffer);
@@ -96,7 +149,10 @@ function SparkleExist(_filename, _forceLoad = false, _callback = undefined, _cal
         },
         _priority);
         
-        //Force the dialog off.
+        //Force the operation type so we can
+        _operation.__opType = SPARKLE_OP_EXIST;
+        
+        //Force the dialog off as this is meant to be a silent operation
         _operation.__psShowDialog = false;
         
         return undefined;

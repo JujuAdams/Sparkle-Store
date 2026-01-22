@@ -13,7 +13,8 @@ function SparkleGetLoadPending()
     var _i = 0;
     repeat(array_length(_queuedArray))
     {
-        if (_queuedArray[_i].GetOperation() == SPARKLE_OP_LOAD)
+        var _operation = _queuedArray[_i].GetOperation();
+        if ((_operation == SPARKLE_OP_LOAD) || (_operation == SPARKLE_OP_EXIST))
         {
             ++_count;
         }
