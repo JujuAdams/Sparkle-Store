@@ -6,10 +6,11 @@
 
 function __SparkleClassLoad(_filename, _callback, _callbackMetadata) constructor
 {
-    static _system = __SparkleSystem();
+    static _system            = __SparkleSystem();
     static _queuedArray       = _system.__queuedArray;
     static _loadPendingArray  = _system.__loadPendingArray;
     static _loadActivityArray = _system.__loadActivityArray;
+    static _presenceCacheMap  = _system.__presenceCacheMap;
     
     __filename         = _filename;
     __callback         = _callback;
@@ -180,6 +181,15 @@ function __SparkleClassLoad(_filename, _callback, _callbackMetadata) constructor
         if (SPARKLE_VERBOSE)
         {
             __SparkleTrace($"Completing LOAD operation {string(ptr(self))}: status = {_status}");
+        }
+        
+        if (_status == SPARKLE_STATUS_FAILED)
+        {
+            _presenceCacheMap[? __SparkleFileCacheKey(__filename)] = false;
+        }
+        else if (_status == SPARKLE_STATUS_SUCCESS)
+        {
+            _presenceCacheMap[? __SparkleFileCacheKey(__filename)] = false;
         }
         
         __status = _status;

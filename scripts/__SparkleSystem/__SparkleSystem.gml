@@ -39,6 +39,8 @@ function __SparkleSystem()
         __saveActivityArray = [];
         __loadActivityArray = [];
         
+        __presenceCacheMap = ds_map_create();
+        
         __ps5BackUpOperation = undefined;
         
         if (string_pos(" ", __psSlotTitle) > 0)

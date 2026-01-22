@@ -10,6 +10,7 @@ function __SparkleClassDelete(_filename, _callback, _callbackMetadata) construct
     static _queuedArray       = _system.__queuedArray;
     static _savePendingArray  = _system.__savePendingArray;
     static _saveActivityArray = _system.__saveActivityArray;
+    static _presenceCacheMap  = _system.__presenceCacheMap;
     
     __filename         = _filename;
     __callback         = _callback;
@@ -151,6 +152,11 @@ function __SparkleClassDelete(_filename, _callback, _callbackMetadata) construct
         if (SPARKLE_ON_SWITCH && (_status == SPARKLE_STATUS_SUCCESS))
         {
             switch_save_data_commit();
+        }
+        
+        if (_status == SPARKLE_STATUS_SUCCESS)
+        {
+            _presenceCacheMap[? __SparkleFileCacheKey(__filename)] = false;
         }
         
         __status = _status;

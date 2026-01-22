@@ -13,6 +13,7 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback, _call
     static _queuedArray       = _system.__queuedArray;
     static _savePendingArray  = _system.__savePendingArray;
     static _saveActivityArray = _system.__saveActivityArray;
+    static _presenceCacheMap  = _system.__presenceCacheMap;
     
     __filename         = _filename;
     __buffer           = _buffer;
@@ -154,6 +155,11 @@ function __SparkleClassSave(_filename, _buffer, _offset, _size, _callback, _call
         if (SPARKLE_ON_SWITCH && (_status == SPARKLE_STATUS_SUCCESS))
         {
             switch_save_data_commit();
+        }
+        
+        if (_status == SPARKLE_STATUS_SUCCESS)
+        {
+            _presenceCacheMap[? __SparkleFileCacheKey(__filename)] = true;
         }
         
         __status = _status;
