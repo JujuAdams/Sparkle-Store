@@ -58,12 +58,12 @@
 /// argument2: The callback metadata specified when calling `SparkleExist()`.
 /// 
 /// @param filename
-/// @param [forceLoad=false]
 /// @param [callback]
 /// @param [callbackMetadata]
+/// @param [forceLoad=false]
 /// @param [priority=normal]
 
-function SparkleExist(_filename, _forceLoad = false, _callback = undefined, _callbackMetadata = undefined, _priority = SPARKLE_PRIORITY_NORMAL)
+function SparkleExist(_filename, _callback = undefined, _callbackMetadata = undefined, _forceLoad = false, _priority = SPARKLE_PRIORITY_NORMAL)
 {
     static _system           = __SparkleSystem();
     static _presenceCacheMap = _system.__presenceCacheMap;

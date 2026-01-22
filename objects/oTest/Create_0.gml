@@ -269,7 +269,7 @@ array_push(optionArray, {
     name: "\"test.txt\" exists",
     func: method(other, function()
     {
-        var _exists = SparkleExist("test.txt", undefined, function(_state, _cached, _callbackMetadata)
+        var _exists = SparkleExist("test.txt", function(_state, _cached, _callbackMetadata)
         {
             if (not _cached)
             {
