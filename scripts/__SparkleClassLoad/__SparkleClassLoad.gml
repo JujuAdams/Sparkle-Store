@@ -152,7 +152,7 @@ function __SparkleClassLoad(_filename, _callback, _callbackMetadata) : __Sparkle
         }
         else if (_status == SPARKLE_STATUS_SUCCESS)
         {
-            _presenceCacheMap[? __SparkleFileCacheKey(__filename)] = false;
+            _presenceCacheMap[? __SparkleFileCacheKey(__filename)] = true;
         }
         
         __status = _status;
