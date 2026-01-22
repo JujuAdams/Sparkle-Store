@@ -46,8 +46,11 @@
 /// will be executed with three parameters:
 /// 
 /// argument0: Whether the file exists, or `undefined` if SparkleStore could not execute the load
-///            operation successfully (typically because the operation was cancelled). You must
-///            handle the `undefined` case in your code.
+///            operation successfully (typically because the another operation to do the same thing
+///            already exists).
+///            
+///            N.B. Your callback must handle this value being `undefined` or you will encounter
+///                 crashes and other unexpected behaviour.
 /// 
 /// argument1: Whether the value for `argument0` is a cached value (`true`) or a value obtained by
 ///            loading the file (`false`).
@@ -68,110 +71,104 @@ function SparkleExist(_filename, _forceLoad = false, _callback = undefined, _cal
     static _loadPendingArray = _system.__loadPendingArray;
     
     var _fileCacheKey = __SparkleFileCacheKey(_filename);
-    var _status = _presenceCacheMap[? _fileCacheKey];
-    
-    if (_forceLoad || (_status == undefined))
+    if (_forceLoad)
     {
-        //Search to see if we have a pending operation targetting this file already
+        ds_map_delete(_presenceCacheMap, _fileCacheKey);
+        var _status = undefined;
+    }
+    else
+    {
+        var _status = _presenceCacheMap[? _fileCacheKey];
+    }
+    
+    if (_status == undefined)
+    {
+        var _makeOperation = true;
+        
+        //Search to see if we have a pending operation targeting this file already
         var _i = 0;
         repeat(array_length(_queuedArray))
         {
             var _operation = _queuedArray[_i];
             if ((_operation.__opType == SPARKLE_OP_EXIST) && is_callable(_operation.__callback) && (_operation.__fileCacheKey == _fileCacheKey))
             {
-                if (is_callable(_callback))
-                {
-                    if (SPARKLE_RUNNING_FROM_IDE)
-                    {
-                        __SparkleTrace($"Warning! Callback for `SparkleExist()` targeting \"{_filename}\" will never execute, an existing callback has already been queued          {debug_get_callstack()}");
-                    }
-                    else
-                    {
-                        __SparkleTrace($"Warning! Callback for `SparkleExist()` targeting \"{_filename}\" will never execute, an existing callback has already been queued");
-                    }
-                }
-                
-                return undefined;
+                _makeOperation = false;
+                break;
             }
             
             ++_i;
         }
         
-        var _i = 0;
-        repeat(array_length(_loadPendingArray))
+        if (_makeOperation)
         {
-            var _operation = _loadPendingArray[_i];
-            if ((_operation.__opType == SPARKLE_OP_EXIST) && is_callable(_operation.__callback) && (_operation.__fileCacheKey == _fileCacheKey))
+            var _i = 0;
+            repeat(array_length(_loadPendingArray))
             {
-                if (is_callable(_callback))
+                var _operation = _loadPendingArray[_i];
+                if ((_operation.__opType == SPARKLE_OP_EXIST) && is_callable(_operation.__callback) && (_operation.__fileCacheKey == _fileCacheKey))
                 {
-                    if (SPARKLE_RUNNING_FROM_IDE)
-                    {
-                        __SparkleTrace($"Warning! Callback for `SparkleExist()` targeting \"{_filename}\" will never execute, an existing callback has already been queued          {debug_get_callstack()}");
-                    }
-                    else
-                    {
-                        __SparkleTrace($"Warning! Callback for `SparkleExist()` targeting \"{_filename}\" will never execute, an existing callback has already been queued");
-                    }
+                    _makeOperation = false;
+                    break;
                 }
                 
-                return undefined;
+                ++_i;
             }
-            
-            ++_i;
         }
         
-        //Create a new operation and shim the callback
-        var _operation = SparkleLoad(_filename, function(_status, _buffer, _callbackMetadata)
+        if (_makeOperation)
         {
-            buffer_delete(_buffer);
-            
-            var _callback = _callbackMetadata.__callback;
-            if (is_callable(_callback))
+            //Create a new operation and shim the callback
+            var _operation = SparkleLoad(_filename, function(_status, _buffer, _callbackMetadata)
             {
-                var _returnStatus = undefined;
+                buffer_delete(_buffer);
                 
-                if (_status == SPARKLE_STATUS_FAILED)
+                var _callback = _callbackMetadata.__callback;
+                if (is_callable(_callback))
                 {
-                    _returnStatus = false;
+                    var _returnStatus = undefined;
+                    
+                    if (_status == SPARKLE_STATUS_FAILED)
+                    {
+                        _returnStatus = false;
+                    }
+                    else if (_status == SPARKLE_STATUS_SUCCESS)
+                    {
+                        _returnStatus = true;
+                    }
+                    
+                    _callback(_returnStatus, false, _callbackMetadata.__callbackMetadata);
                 }
-                else if (_status == SPARKLE_STATUS_SUCCESS)
-                {
-                    _returnStatus = true;
-                }
-                
-                _callback(_returnStatus, false, _callbackMetadata.__callbackMetadata);
-            }
-        },
-        {
-            __callback: _callback,
-            __callbackMetadata: _callbackMetadata,
-        },
-        _priority);
-        
-        //Force the operation type so we can
-        _operation.__opType = SPARKLE_OP_EXIST;
-        
-        //Force the dialog off as this is meant to be a silent operation
-        _operation.__psShowDialog = false;
-        
-        return undefined;
-    }
-    else
-    {
-        if (is_callable(_callback))
-        {
-            call_later(1, time_source_units_frames, method({
-                __status:           _status,
-                __callback:         _callback,
+            },
+            {
+                __callback: _callback,
                 __callbackMetadata: _callbackMetadata,
             },
-            function()
-            {
-                __callback(__status, true, __callbackMetadata);
-            }));
+            _priority);
+            
+            //Force the operation type so we can
+            _operation.__opType = SPARKLE_OP_EXIST;
+            
+            //Force the dialog off as this is meant to be a silent operation
+            _operation.__psShowDialog = false;
+            
+            return undefined;
         }
         
-        return _presenceCacheMap[? _fileCacheKey];
+        //If we aren't making an operation then fall through and execute the callback
     }
+    
+    if (is_callable(_callback))
+    {
+        call_later(1, time_source_units_frames, method({
+            __status:           _status,
+            __callback:         _callback,
+            __callbackMetadata: _callbackMetadata,
+        },
+        function()
+        {
+            __callback(__status, true, __callbackMetadata);
+        }));
+    }
+    
+    return _status;
 }
