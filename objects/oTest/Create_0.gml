@@ -1,5 +1,10 @@
 // Feather disable all
 
+if (SPARKLE_ON_XBOX)
+{
+    SparkleSetXboxUser(xboxone_get_activating_user());
+}
+
 randomize();
 
 watchStart = undefined;

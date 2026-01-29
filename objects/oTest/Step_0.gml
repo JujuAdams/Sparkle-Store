@@ -22,7 +22,12 @@ repeat(gamepad_get_device_count())
     {
         gamepadFocus = _i;
         SparkleSetPSGamepadIndex(_i);
-        SparkleSetXboxUser(xboxone_user_for_pad_safe(_i));
+        
+        var _user = xboxone_user_for_pad_safe(_i);
+        if (_user != undefined)
+        {
+            SparkleSetXboxUser(_user);
+        }
     }
     
     ++_i;
