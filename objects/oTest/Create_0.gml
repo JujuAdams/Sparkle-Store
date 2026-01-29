@@ -1,8 +1,14 @@
 // Feather disable all
 
+// See Game Options / Xbox One & Series X/S / Simplified User Model
+xboxSimplifiedUserModel = true;
+
 if (SPARKLE_ON_XBOX)
 {
-    SparkleSetXboxUser(xboxone_get_activating_user());
+    if (xboxSimplifiedUserModel)
+    {
+        SparkleSetXboxUser(xboxone_get_activating_user());
+    }
 }
 
 randomize();

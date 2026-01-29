@@ -23,10 +23,13 @@ repeat(gamepad_get_device_count())
         gamepadFocus = _i;
         SparkleSetPSGamepadIndex(_i);
         
-        var _user = xboxone_user_for_pad_safe(_i);
-        if (_user != undefined)
+        if (not xboxSimplifiedUserModel)
         {
-            SparkleSetXboxUser(_user);
+            var _user = xboxone_user_for_pad_safe(_i);
+            if (_user != undefined)
+            {
+                SparkleSetXboxUser(_user);
+            }
         }
     }
     
@@ -65,4 +68,17 @@ if ((watchStart != undefined) && (not SparkleGetRecentActivity(0)))
 {
     show_debug_message($"Operation lasted {current_time - watchStart}ms");
     watchStart = undefined;
+}
+
+if (xboxone_is_suspending())
+{
+    show_debug_message("xboxone_is_suspending()");
+    SparkleSubmitAllSaves();
+    
+    show_debug_message($"SparkleGetSavePending() = {SparkleGetSavePending()}");
+    if (SparkleGetSavePending() <= 0)
+    {
+        show_debug_message("xboxone_suspend()");
+        xboxone_suspend();
+    }
 }
