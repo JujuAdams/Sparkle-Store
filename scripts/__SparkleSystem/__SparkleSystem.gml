@@ -81,7 +81,7 @@ function __SparkleSystem()
             }
             else if (not instance_exists(__oSparkleStore))
             {
-                __SparkleError("`__oSparkleStore` has been destroyed or deactivated.\nPlease enough this instance is never destroyed or deactivated.");
+                __SparkleError("`__oSparkleStore` has been destroyed or deactivated.\nPlease ensure this instance is never destroyed or deactivated.");
             }
             
             //Clean up recent activity arrays
